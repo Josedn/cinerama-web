@@ -1,0 +1,45 @@
+.billboard {
+    padding-left: 60px;
+    margin-top: 25px;
+}
+
+.billboard__group {
+    margin-bottom: 20px;
+}
+
+.group__title {
+    margin: 0;
+    padding: 0;
+}
+
+.group__list {
+    margin-top: 20px;
+    display: flex;
+}
+
+.movie {
+    margin-right: 15px;
+    color: #bdbdbd;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.movie:hover {
+    color: #8b8b8b;
+}
+
+.movie__preview {
+    width: 134px;
+    height: 196px;
+}
+
+.movie__info {}
+
+.movie__title {
+    font-size: 14px;
+}
+
+.movie__year {
+    font-size: 12px;
+    color: #8b8b8b;
+}
