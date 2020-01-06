@@ -4,5 +4,30 @@
     background-color: #242424;
     width: 100%;
     display: flex;
+    align-items: center;
     padding: 0 60px;
+}
+
+.header__logo-image {
+    width: 97px;
+}
+
+.header__nav {
+    list-style-type: none;
+    margin: 0 0 0 50px;
+    padding: 0;
+}
+
+.nav__option {
+    display: inline;
+    margin-right: 20px;
+}
+
+.nav__option-anchor {
+    text-decoration: none;
+    color: #bdbdbd;
+}
+
+.nav__option-anchor--selected {
+    color: #f3f3f3;
 }
