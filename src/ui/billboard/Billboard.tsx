@@ -1,10 +1,10 @@
 import React from 'react';
-import './Billboard.css';
+import './Billboard.scss';
 
 const Movie = () => {
   return (
     <div className="movie">
-      <img className="movie__preview" src="/images/sample1.jpg" />
+      <img className="movie__preview" src="http://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" alt="My sample" />
       <div className="movie__info">
         <h4 className="movie__title">The Walking Dead</h4>
         <h5 className="movie__year">2007</h5>
@@ -18,7 +18,7 @@ const Group = () => {
     <div className="billboard__group">
       <h2 className="group__title">Populares en Netflix</h2>
       <div className="group__list">
-        <Movie /><Movie /><Movie /><Movie /><Movie /><Movie />
+        <Movie /><Movie /><Movie /><Movie /><Movie /><Movie /><Movie /><Movie /><Movie /><Movie /><Movie /><Movie />
       </div>
     </div>
   );
