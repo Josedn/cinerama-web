@@ -1,21 +1,25 @@
 @import '../../generic/colors.scss';
 
 .search_bar {
-    background-color: $cine_black;
-    border: 1px solid $cine_white;
     color: $cine_white;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.search_bar--open {
+    background-color: $cine_black;
+    border: 1px solid $cine_white;
     width: 270px;
     height: 35px;
     padding: 0 10px;
-    box-sizing: border-box;
 }
 
 .search_bar__input {
     border: none;
-    font: inherit;
-    font-size: 14px;
+    font-family: inherit;
+    font-size: inherit;
     background: none;
     outline: none;
     padding: 0 15px;
@@ -26,6 +30,21 @@
     color: $cine_dark_gray;
 }
 
-.search_bar__icon-close {
+.search_bar__icon {
+    font-size: 16px;   
+}
+
+.search_bar__button {
+    cursor: pointer;
+    width: unset;
+    background: unset;
+    border: unset;
+    color: inherit;
+    font-family: inherit;
+    padding: 0;
+    font-size: inherit;
+}
+
+.search_bar__button--close {
     margin-left: auto;
 }
