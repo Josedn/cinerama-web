@@ -16,7 +16,7 @@ const Header: React.FC = () => {
       <ul className="header__nav header__nav--options">
         <li className="nav__option"><a className="nav__option-anchor" href="/">Salir</a></li>
         <li className="nav__option">
-          <SearchBar className="nav__search" />
+          <SearchBar />
         </li>
       </ul>
     </header>
