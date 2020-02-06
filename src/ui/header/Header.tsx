@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import SearchBar from './search_bar/SearchBar';
 
 const Header: React.FC = () => {
   return (
@@ -15,11 +16,7 @@ const Header: React.FC = () => {
       <ul className="header__nav header__nav--options">
         <li className="nav__option"><a className="nav__option-anchor" href="/">Salir</a></li>
         <li className="nav__option">
-          <div className="nav__search">
-            <i className="nav__search-icon-glass fa fa-search"></i>
-            <input className="nav__search-input" type="text" placeholder="Títulos, personas, géneros" />
-            <i className="nav__search-icon-close fa fa-close"></i>
-          </div>
+          <SearchBar className="nav__search" />
         </li>
       </ul>
     </header>
