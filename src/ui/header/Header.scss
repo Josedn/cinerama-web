@@ -1,6 +1,8 @@
+@import '../generic/colors.scss';
+
 .header {
     height: 70px;
-    background-color: #242424;
+    background-color: $cine_light_black;
     display: flex;
     align-items: center;
     padding: 0 60px;
@@ -38,13 +40,13 @@
 .nav__option-anchor {
     transition: 0.2s;
     text-decoration: none;
-    color: #bdbdbd;
+    color: $cine_light_gray;
 }
 
 .nav__option-anchor:hover {
-    color: #8b8b8b;
+    color: $cine_dark_gray;
 }
 
 .nav__option-anchor--selected {
-    color: #ffffff;
+    color: $cine_white;
 }

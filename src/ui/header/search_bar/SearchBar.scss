@@ -1,7 +1,9 @@
+@import '../../generic/colors.scss';
+
 .search_bar {
-    background-color: #000000;
-    border: 1px solid #ffffff;
-    color: #ffffff;
+    background-color: $cine_black;
+    border: 1px solid $cine_white;
+    color: $cine_white;
     display: flex;
     align-items: center;
     width: 270px;
@@ -21,7 +23,7 @@
 }
 
 .search_bar__input::placeholder {
-    color: #8b8b8b;
+    color: $cine_dark_gray;
 }
 
 .search_bar__icon-close {

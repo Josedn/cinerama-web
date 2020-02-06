@@ -6,10 +6,6 @@ type SearchBarProps = {
 };
 
 export default class SearchBar extends React.Component<SearchBarProps> {
-    constructor(props: SearchBarProps) {
-        super(props);
-    }
-
     render() {
         const { className } = this.props;
         const actualClassName = className == null ? 'search_bar' : className + ' search_bar';

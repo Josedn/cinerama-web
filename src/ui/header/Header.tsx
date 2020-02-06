@@ -1,5 +1,5 @@
 import React from 'react';
-import './Header.css';
+import './Header.scss';
 import SearchBar from './search_bar/SearchBar';
 
 const Header: React.FC = () => {

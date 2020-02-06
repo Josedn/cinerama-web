@@ -1,5 +1,5 @@
 import React from "react";
-import './CineUI.css';
+import './CineUI.scss';
 import Header from "./header/Header";
 import Billboard from "./billboard/Billboard";
 
