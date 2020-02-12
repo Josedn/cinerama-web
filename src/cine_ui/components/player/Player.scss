@@ -1,0 +1,21 @@
+.player {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.player__video {
+    width: 100%;
+    height: 100%;
+}
+
+.player__info {
+    display: none;
+}
+
+.player__control_bar {
+}
