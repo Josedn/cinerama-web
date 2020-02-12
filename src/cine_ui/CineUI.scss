@@ -1,4 +1,4 @@
-@import './components/generic/colors.scss';
+@import "./components/generic/colors.scss";
 
 html {
     touch-action: none;
@@ -8,11 +8,16 @@ html {
 body {
     background-color: $cine_black;
     color: $cine_alt_white;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     padding: 0;
 }

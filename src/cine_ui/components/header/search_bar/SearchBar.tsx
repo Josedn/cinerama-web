@@ -1,8 +1,7 @@
-import React, { ChangeEvent, SyntheticEvent, RefObject } from 'react';
-import './SearchBar.scss';
+import React, { ChangeEvent, SyntheticEvent, RefObject } from "react";
+import "./SearchBar.scss";
 
-type SearchBarProps = {
-};
+type SearchBarProps = {};
 
 type SearchBarState = {
     searchText: string;
@@ -10,12 +9,14 @@ type SearchBarState = {
 };
 
 const initialState: SearchBarState = {
-    searchText: '',
-    active: false,
+    searchText: "",
+    active: false
 };
 
-export default class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
-
+export default class SearchBar extends React.Component<
+    SearchBarProps,
+    SearchBarState
+> {
     searchInput: RefObject<HTMLInputElement>;
     constructor(props: SearchBarProps) {
         super(props);
@@ -25,33 +26,36 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
 
     handleUpdateText = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            searchText: event.target.value,
+            searchText: event.target.value
         });
-    }
+    };
 
     handleToggleSearch = (event: SyntheticEvent) => {
         const { active, searchText } = this.state;
         if (searchText.length === 0) {
-            this.setState({
-                active: !active,
-            }, () => {
-                this.focusSearchInput();
-            });
+            this.setState(
+                {
+                    active: !active
+                },
+                () => {
+                    this.focusSearchInput();
+                }
+            );
         }
-    }
+    };
 
     handleCancelSearch = (event: SyntheticEvent) => {
         this.setState({
-            searchText: '',
+            searchText: ""
         });
         this.focusSearchInput();
-    }
+    };
 
     focusSearchInput = () => {
         if (this.searchInput.current != null) {
             this.searchInput.current.focus();
         }
-    }
+    };
 
     render() {
         const { searchText, active } = this.state;
@@ -59,11 +63,24 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
         if (active || searchText.length > 0) {
             return (
                 <div className="search_bar search_bar--open">
-                    <button className="search_bar__button" onClick={this.handleToggleSearch}>
+                    <button
+                        className="search_bar__button"
+                        onClick={this.handleToggleSearch}
+                    >
                         <i className="search_bar__icon fa fa-search"></i>
                     </button>
-                    <input className="search_bar__input" type="text" placeholder="Títulos, personas, géneros" value={searchText} onChange={this.handleUpdateText} ref={this.searchInput} />
-                    <button className="search_bar__button search_bar__button--close" onClick={this.handleCancelSearch}>
+                    <input
+                        className="search_bar__input"
+                        type="text"
+                        placeholder="Títulos, personas, géneros"
+                        value={searchText}
+                        onChange={this.handleUpdateText}
+                        ref={this.searchInput}
+                    />
+                    <button
+                        className="search_bar__button search_bar__button--close"
+                        onClick={this.handleCancelSearch}
+                    >
                         <i className="search_bar__icon fa fa-close"></i>
                     </button>
                 </div>
@@ -72,7 +89,10 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
 
         return (
             <div className="search_bar">
-                <button className="search_bar__button" onClick={this.handleToggleSearch}>
+                <button
+                    className="search_bar__button"
+                    onClick={this.handleToggleSearch}
+                >
                     <i className="search_bar__icon fa fa-search"></i>
                 </button>
             </div>
