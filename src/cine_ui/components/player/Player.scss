@@ -53,6 +53,17 @@
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0) 100%);
 }
 
+.player__control_top {
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  padding-left: 20px;
+}
+
 .player__control_bottom {
   bottom: 0;
   display: flex;
@@ -77,13 +88,100 @@
   height: 95px;
   background: none;
   color: inherit;
+  padding-bottom: 15px;
+  cursor: pointer;
 }
 
 .player__control-button-icon {
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .player__control-title {
   display: flex;
   align-items: center;
+  width: unset;
+  font-size: 24px;
+  font-weight: bold;
+  padding-left: 15px;
+  cursor: unset;
+  flex-grow: 1;
+}
+
+.player__control-progress-container {
+  display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
+}
+
+.player__control-progress-bar {
+  width: 100%;
+  margin: 0 2.5em 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.scrubber-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  touch-action: none;
+  height: 15px;
+}
+
+.scrubber-bar {
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: auto;
+  position: relative;
+}
+
+.scrubber__track {
+  height: 5px;
+  background: #5b5b5b;
+  position: relative;
+  transition: height 0.2s ease;
+  will-change: height;
+}
+
+.scrubber__buffered,
+.scrubber__progress {
+  display: flex;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.scrubber__buffered {
+  width: 52.7%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.scrubber__progress {
+  width: 35.99%;
+  background: #e50914;
+}
+
+.scrubber__play_head {
+  width: 43%;
+  height: 100%;
+  border-left: solid 1px rgba(255, 255, 255, 0.5);
+  border-right: solid 1px rgba(255, 255, 255, 0.5);
+  margin-left: -1px;
+  position: absolute;
+  //display: none;
+  display: block;
+  transform: translateZ(0);
+}
+
+.player__control-progress-time {
+  display: none;
+}
+
+.player__control-time_remaining {
 }
