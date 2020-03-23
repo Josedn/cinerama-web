@@ -15,7 +15,7 @@
   height: 100%;
 }
 
-.player_controlzone {
+.player__control-zone {
   display: flex;
   width: 100%;
   height: 100%;
@@ -27,8 +27,8 @@
   color: $cine_white;
 }
 
-.player_backdrop-top,
-.player_backdrop-bottom {
+.player__backdrop-top,
+.player__backdrop-bottom {
   position: absolute;
   left: 0;
   right: 0;
@@ -39,21 +39,21 @@
   opacity: 0;
 }
 
-.player_backdrop--active {
+.player__backdrop--active {
   opacity: 0.75;
 }
 
-.player_backdrop-bottom {
+.player__backdrop-bottom {
   bottom: 0;
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0) 100%);
 }
 
-.player_backdrop-top {
+.player__backdrop-top {
   top: 0;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0) 100%);
 }
 
-.player__control_top {
+.control__top {
   top: 0;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@
   padding-left: 20px;
 }
 
-.player__control_bottom {
+.control__bottom {
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -74,13 +74,13 @@
   width: 100%;
 }
 
-.player__control-buttons {
+.control__buttons {
   display: flex;
   //justify-content: space-between;
 }
 
-.player__control-button,
-.player__control-title {
+.control__button,
+.control__title {
   box-sizing: border-box;
   border: 3px solid transparent;
   border-radius: 0.3em;
@@ -92,11 +92,11 @@
   cursor: pointer;
 }
 
-.player__control-button-icon {
+.control__button-icon {
   font-size: 32px;
 }
 
-.player__control-title {
+.control__title {
   display: flex;
   align-items: center;
   width: unset;
@@ -107,14 +107,14 @@
   flex-grow: 1;
 }
 
-.player__control-progress-container {
+.control__progress-container {
   display: flex;
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
 }
 
-.player__control-progress-bar {
+.control__progress-bar {
   width: 100%;
   margin: 0 2.5em 0 0;
   display: flex;
@@ -167,7 +167,7 @@
   background: #e50914;
 }
 
-.scrubber__play_head {
+.scrubber__play-head {
   width: 43%;
   height: 100%;
   border-left: solid 1px rgba(255, 255, 255, 0.5);
@@ -179,9 +179,9 @@
   transform: translateZ(0);
 }
 
-.player__control-progress-time {
+.control__progress-time {
   display: none;
 }
 
-.player__control-time_remaining {
+.control__time-remaining {
 }

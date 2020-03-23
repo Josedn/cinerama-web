@@ -62,15 +62,15 @@ export default class SearchBar extends React.Component<
 
         if (active || searchText.length > 0) {
             return (
-                <div className="search_bar search_bar--open">
+                <div className="search-bar search-bar--open">
                     <button
-                        className="search_bar__button"
+                        className="search-bar__button"
                         onClick={this.handleToggleSearch}
                     >
-                        <i className="search_bar__icon fa fa-search"></i>
+                        <i className="search-bar__icon fa fa-search"></i>
                     </button>
                     <input
-                        className="search_bar__input"
+                        className="search-bar__input"
                         type="text"
                         placeholder="Títulos, personas, géneros"
                         value={searchText}
@@ -78,22 +78,22 @@ export default class SearchBar extends React.Component<
                         ref={this.searchInput}
                     />
                     <button
-                        className="search_bar__button search_bar__button--close"
+                        className="search-bar__button search-bar__button--close"
                         onClick={this.handleCancelSearch}
                     >
-                        <i className="search_bar__icon fa fa-close"></i>
+                        <i className="search-bar__icon fa fa-close"></i>
                     </button>
                 </div>
             );
         }
 
         return (
-            <div className="search_bar">
+            <div className="search-bar">
                 <button
-                    className="search_bar__button"
+                    className="search-bar__button"
                     onClick={this.handleToggleSearch}
                 >
-                    <i className="search_bar__icon fa fa-search"></i>
+                    <i className="search-bar__icon fa fa-search"></i>
                 </button>
             </div>
         );
