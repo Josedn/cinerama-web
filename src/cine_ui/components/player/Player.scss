@@ -101,7 +101,6 @@
   align-items: center;
   width: unset;
   font-size: 24px;
-  //  font-weight: bold;
   padding-left: 15px;
   cursor: unset;
   flex-grow: 1;
@@ -109,19 +108,18 @@
 
 .control__progress-container {
   display: flex;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 32px;
   align-items: center;
 }
 
 .control__progress-bar {
-  width: 100%;
+  flex-grow: 1;
   margin: 0 2.5em 0 0;
   display: flex;
   align-items: center;
 }
 
-.scrubber-container {
+.scrubber__container {
   width: 100%;
   display: flex;
   align-items: center;
@@ -131,7 +129,7 @@
   height: 15px;
 }
 
-.scrubber-bar {
+.scrubber__bar {
   flex-grow: 1;
   flex-shrink: 0;
   width: auto;
@@ -158,20 +156,19 @@
 }
 
 .scrubber__buffered {
-  width: 52.7%;
+  width: 52%;
   background: rgba(255, 255, 255, 0.2);
 }
 
 .scrubber__progress {
-  width: 35.99%;
+  width: 35%;
   background: #e50914;
 }
 
 .scrubber__play-head {
   width: 43%;
   height: 100%;
-  border-left: solid 1px rgba(255, 255, 255, 0.5);
-  border-right: solid 1px rgba(255, 255, 255, 0.5);
+  border-right: solid 2px $cine_white;
   margin-left: -1px;
   position: absolute;
   //display: none;
@@ -180,8 +177,8 @@
 }
 
 .control__progress-time {
-  display: none;
 }
 
 .control__time-remaining {
+  font-size: 20px;
 }

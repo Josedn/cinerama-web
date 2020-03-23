@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.scss";
 import SearchBar from "./search_bar/SearchBar";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
     return (
@@ -14,29 +15,29 @@ const Header: React.FC = () => {
             </a>
             <ul className="header__nav">
                 <li className="nav__option">
-                    <a
+                    <Link
                         className="nav__option-anchor nav__option-anchor--selected"
-                        href="/"
+                        to="/"
                     >
                         Inicio
-                    </a>
+                    </Link>
                 </li>
                 <li className="nav__option">
-                    <a className="nav__option-anchor" href="/">
+                    <Link className="nav__option-anchor" to="/watch">
                         Programas
-                    </a>
+                    </Link>
                 </li>
                 <li className="nav__option">
-                    <a className="nav__option-anchor" href="/">
+                    <Link className="nav__option-anchor" to="/">
                         Películas
-                    </a>
+                    </Link>
                 </li>
             </ul>
             <ul className="header__nav header__nav--options">
                 <li className="nav__option">
-                    <a className="nav__option-anchor" href="/">
+                    <Link className="nav__option-anchor" to="/">
                         Salir
-                    </a>
+                    </Link>
                 </li>
                 <li className="nav__option">
                     <SearchBar />
