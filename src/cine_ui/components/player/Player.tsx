@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { RefObject, SyntheticEvent } from "react";
 import "./Player.scss";
 import { Link } from "react-router-dom";
 import { secondsToTime } from "../../../cine_engine/misc/utils";
@@ -9,21 +9,25 @@ type PlayerState = {
     currentTime: number;
     playing: boolean;
     duration: number;
+    peekPosition: number;
 };
 const initialState: PlayerState = {
     title: "Labyrinth",
     playing: false,
     currentTime: 0,
     duration: 1,
+    peekPosition: 0
 };
 
 class Player extends React.Component<PlayerProps, PlayerState> {
     videoRef: RefObject<HTMLVideoElement>;
+    scrubberRef: RefObject<HTMLDivElement>;
 
     constructor(props: PlayerProps) {
         super(props);
         this.state = initialState;
         this.videoRef = React.createRef();
+        this.scrubberRef = React.createRef();
     }
 
     componentDidMount() {
@@ -58,7 +62,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
         }
     }
 
-    handlePlayPauseClick = () => {
+    handlePlayPauseClick = (event: SyntheticEvent<HTMLButtonElement>) => {
         const videoElement = this.videoRef.current;
         if (videoElement != null) {
             if (videoElement.paused) {
@@ -67,6 +71,31 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                 videoElement.pause();
             }
         }
+    }
+
+    handleFullscreenClick = (event: SyntheticEvent<HTMLButtonElement>) => {
+        const videoElement = this.videoRef.current;
+        if (videoElement != null) {
+            videoElement.requestFullscreen();
+        }
+    }
+
+    handleProgressPeekHover = (event: SyntheticEvent<HTMLDivElement>) => {
+        const mouseEvent = event.nativeEvent as MouseEvent;
+        const container = this.scrubberRef.current;
+        const { duration } = this.state;
+        if (mouseEvent != null && container != null) {
+            const localPosition = mouseEvent.x - container.getBoundingClientRect().x;
+            const selectedPercent = localPosition / container.offsetWidth;
+            const peekPosition = selectedPercent * duration;
+            this.setState({
+                peekPosition
+            });
+        }
+    }
+
+    handleProgressPeekClick = (event: SyntheticEvent<HTMLDivElement>) => {
+        console.log('do peek');
     }
 
     getCurrentClock = () => {
@@ -79,9 +108,13 @@ class Player extends React.Component<PlayerProps, PlayerState> {
         return (currentTime / duration) * 100;
     }
 
+    getPeekPercent = () => {
+        const { peekPosition, duration } = this.state;
+        return (peekPosition / duration) * 100;
+    }
+
     getBufferedPercent = () => {
         const videoElement = this.videoRef.current;
-        const { duration } = this.state;
         let max = 0;
         if (videoElement != null) {
             for (let i = 0; i < videoElement.buffered.length; i++) {
@@ -90,8 +123,9 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                     max = current;
                 }
             }
+            return (max / videoElement.duration) * 100;
         }
-        return (max / duration) * 100;
+        return 0;
     }
 
     render() {
@@ -119,12 +153,12 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                     <div className="control__bottom">
                         <div className="control__progress-container">
                             <div className="control__progress-bar">
-                                <div className="scrubber__container">
+                                <div className="scrubber__container" onMouseOver={this.handleProgressPeekHover}>
                                     <div className="scrubber__bar">
-                                        <div className="scrubber__track">
+                                        <div className="scrubber__track" ref={this.scrubberRef} onClick={this.handleProgressPeekClick}>
                                             <div className="scrubber__buffered" style={{ width: this.getBufferedPercent() + "%" }}></div>
                                             <div className="scrubber__progress" style={{ width: this.getProgressPercent() + "%" }}></div>
-                                            {/*<div className="scrubber__play-head" style={{ width: this.getProgressPercent() + "%" }}></div>*/}
+                                            <div className="scrubber__play-head" style={{ width: this.getPeekPercent() + "%" }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +185,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                             <button className="control__button">
                                 <i className="fa fa-cc control__button-icon" aria-hidden="true"></i>
                             </button>
-                            <button className="control__button">
+                            <button className="control__button" onClick={this.handleFullscreenClick}>
                                 <i className="fa fa-expand control__button-icon" aria-hidden="true"></i>
                             </button>
                         </div>

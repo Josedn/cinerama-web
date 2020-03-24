@@ -123,10 +123,10 @@
   width: 100%;
   display: flex;
   align-items: center;
-  cursor: pointer;
   position: relative;
   touch-action: none;
-  height: 15px;
+  height: 28px;
+  cursor: pointer;
 }
 
 .scrubber__bar {
@@ -142,6 +142,10 @@
   position: relative;
   transition: height 0.2s ease;
   will-change: height;
+}
+
+.scrubber__container:hover .scrubber__track {
+  height: 10px;
 }
 
 .scrubber__buffered,
