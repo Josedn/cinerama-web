@@ -74,10 +74,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
     }
 
     handleFullscreenClick = (event: SyntheticEvent<HTMLButtonElement>) => {
-        const videoElement = this.videoRef.current;
-        if (videoElement != null) {
-            videoElement.requestFullscreen();
-        }
+        
     }
 
     handleProgressPeekHover = (event: SyntheticEvent<HTMLDivElement>) => {
