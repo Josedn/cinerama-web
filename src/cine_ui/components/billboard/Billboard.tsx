@@ -26,7 +26,7 @@ const Movie = () => {
 const Group = () => {
     return (
         <div className="billboard__group">
-            <h2 className="group__title">Populares en Netflix</h2>
+            <h2 className="group__title">Trending Now</h2>
             <div className="group__list">
                 <Movie />
                 <Movie />
@@ -46,7 +46,6 @@ const Group = () => {
 const Billboard: React.FC = () => {
     return (
         <div className="billboard">
-            <Group />
             <Group />
             <Group />
         </div>

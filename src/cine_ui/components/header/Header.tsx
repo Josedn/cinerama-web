@@ -9,8 +9,8 @@ const Header: React.FC = () => {
             <a className="header__logo" href="/">
                 <img
                     className="header__logo-image"
-                    src="/images/netflix.png"
-                    alt="Netflix"
+                    src="/images/filmstock.png"
+                    alt="Filmstock"
                 ></img>
             </a>
             <ul className="header__nav">
