@@ -47,7 +47,7 @@
 .group__title {
     margin: 0;
     padding: 0;
-    color: $cine_light_gray;
+    color: $cine_white;
 }
 
 .group__list {
@@ -60,6 +60,9 @@
     color: $cine_light_gray;
     cursor: pointer;
     transition: 0.2s;
+    width: 200px;
+    height: 350px;
+    overflow: hidden;
 }
 
 .movie:hover {
@@ -68,17 +71,15 @@
 
 .movie__preview {
     width: 200px;
-    //height: 392px;
+    height: 300px;
+    object-fit: cover;
 }
 
 .movie__info {
 }
 
 .movie__title {
-    font-size: 14px;
-}
-
-.movie__year {
-    font-size: 12px;
-    color: $cine_light_gray;
+    font-size: 18px;
+    font-weight: 300;
+    text-shadow: 0px 1px 5px #000000;
 }

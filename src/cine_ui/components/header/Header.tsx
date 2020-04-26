@@ -9,7 +9,7 @@ const Header: React.FC = () => {
             <a className="header__logo" href="/">
                 <img
                     className="header__logo-image"
-                    src="/images/filmstock.png"
+                    src="/images/filmstock.svg"
                     alt="Filmstock"
                 ></img>
             </a>

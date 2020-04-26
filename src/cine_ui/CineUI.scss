@@ -12,6 +12,8 @@ body {
   font-weight: 300;
   margin: 0 auto;
   text-transform: lowercase;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {

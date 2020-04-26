@@ -10,14 +10,22 @@ const images = [
     "http://image.tmdb.org/t/p/w500/4AHkWCSau4OmMJTFo36bFMlCRtu.jpg"
 ];
 
+const titles = [
+    "Pulp fiction",
+    "Parasite",
+    "harry potter and the chamber of secrets",
+    "scarface",
+    "star wars: episode iv - a new hope"
+];
+
 const Movie = () => {
     const randomImg = images[Math.floor(images.length * Math.random())];
+    const randomTitle = titles[Math.floor(titles.length * Math.random())];
     return (
         <div className="movie">
             <img className="movie__preview" src={randomImg} alt="My sample" />
             <div className="movie__info">
-                <h4 className="movie__title">The Walking Dead</h4>
-                <h5 className="movie__year">2007</h5>
+                <h4 className="movie__title">{randomTitle}</h4>
             </div>
         </div>
     );
@@ -26,14 +34,8 @@ const Movie = () => {
 const Group = () => {
     return (
         <div className="billboard__group">
-            <h2 className="group__title">Trending Now</h2>
+            <h2 className="group__title">Popular</h2>
             <div className="group__list">
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
                 <Movie />
                 <Movie />
                 <Movie />
