@@ -2,7 +2,7 @@
 
 .header {
     height: 70px;
-    background-color: $cine_light_black;
+    background-color: $cine_black;
     display: flex;
     align-items: center;
     padding: 0 60px;
@@ -43,7 +43,7 @@
 }
 
 .nav__option-anchor:hover {
-    color: $cine_dark_gray;
+    color: $cine_light_gray;
 }
 
 .nav__option-anchor--selected {

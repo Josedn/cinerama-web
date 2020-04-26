@@ -19,17 +19,17 @@ const Header: React.FC = () => {
                         className="nav__option-anchor nav__option-anchor--selected"
                         to="/"
                     >
-                        Inicio
+                        Home
                     </Link>
                 </li>
                 <li className="nav__option">
                     <Link className="nav__option-anchor" to="/watch">
-                        Programas
+                        Movies
                     </Link>
                 </li>
                 <li className="nav__option">
                     <Link className="nav__option-anchor" to="/">
-                        Películas
+                        Search
                     </Link>
                 </li>
             </ul>

@@ -46,6 +46,8 @@ const Group = () => {
 const Billboard: React.FC = () => {
     return (
         <div className="billboard">
+            <div className="billboard__background"></div>
+            <div className="billboard__blur"></div>
             <Group />
             <Group />
         </div>

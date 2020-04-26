@@ -6,11 +6,12 @@ html {
 }
 
 body {
-  background-color: $cine_black;
-  color: $cine_alt_white;
+  background-color: $cine_gray;
+  color: green;
   font-family: "myriad-pro", sans-serif;
   font-weight: 300;
   margin: 0 auto;
+  text-transform: lowercase;
 }
 
 a {
