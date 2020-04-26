@@ -48,6 +48,7 @@ const Billboard: React.FC = () => {
         <div className="billboard">
             <div className="billboard__background"></div>
             <div className="billboard__blur"></div>
+            <div className="billboard__gradient"></div>
             <Group />
             <Group />
         </div>

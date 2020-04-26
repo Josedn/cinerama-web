@@ -24,8 +24,18 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 2;
+    z-index: 1;
     backdrop-filter: blur(8px);
+}
+
+.billboard__gradient {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(44, 44, 44, 1) 100%);
 }
 
 .billboard__group {
@@ -53,7 +63,7 @@
 }
 
 .movie:hover {
-    color: $cine_light_gray;
+    color: $cine_white;
 }
 
 .movie__preview {
