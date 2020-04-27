@@ -50,7 +50,7 @@ const Header: React.FC = () => {
             <ul className="header__nav header__nav--options">
                 <li className="nav__option">
                     <Link className="nav__option-anchor" to="/">
-                        Salir
+                        Logout
                     </Link>
                 </li>
                 <li className="nav__option">
