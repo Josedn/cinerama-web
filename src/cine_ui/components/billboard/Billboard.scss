@@ -113,6 +113,7 @@
     margin-right: 10px;
     transition: 0.2s;
     cursor: pointer;
+    border: none;
 }
 
 .slideshow__progress-box:last-child {
@@ -120,7 +121,8 @@
 }
 
 .slideshow__progress-box--active,
-.slideshow__progress-box:hover {
+.slideshow__progress-box:hover,
+.slideshow__progress-box:focus {
     background-color: $cine_white;
 }
 
@@ -137,7 +139,14 @@
     position: absolute;
     bottom: 50px;
     cursor: pointer;
+    transition: 0.2s;
 }
+
+.slideshow__button:hover,
+.slideshow__button:focus {
+    background-color: $cine_light_gray;
+}
+
 .slideshow__button-icon {
     margin-right: 15px;
     font-size: 20px;

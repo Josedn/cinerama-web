@@ -56,9 +56,9 @@ const Slideshow = () => {
                 <div className="slideshow__preview">
                     <img className="slideshow__image" src={randomImg} alt={randomTitle} />
                     <div className="slideshow__progress">
-                        <div className="slideshow__progress-box slideshow__progress-box--active"></div>
-                        <div className="slideshow__progress-box"></div>
-                        <div className="slideshow__progress-box"></div>
+                        <button className="slideshow__progress-box slideshow__progress-box--active"></button>
+                        <button className="slideshow__progress-box"></button>
+                        <button className="slideshow__progress-box"></button>
                     </div>
                 </div>
                 <div className="slideshow__content">
