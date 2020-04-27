@@ -78,7 +78,7 @@
 .slideshow__title {
     color: $cine_white;
     font-size: 60px;
-    margin-top: -20px; //?????
+    margin-top: -20px; // or line-height?????
 }
 
 .slideshow__subtitle {
@@ -127,7 +127,8 @@
 .slideshow__button {
     width: 135px;
     height: 45px;
-    background-color: #e6e6e6;
+    background-color: $cine_white;
+    color: $cine_black;
     font-family: inherit;
     font-weight: 600;
     font-size: 18px;
