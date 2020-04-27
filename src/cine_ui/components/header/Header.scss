@@ -9,14 +9,12 @@
     position: sticky;
     top: 0;
     font-weight: 400;
-}
-
-.header__logo {
-    fill: $cine_orange;
+    z-index: 1;
 }
 
 .header__logo-image {
     width: 105px;
+    fill: $cine_orange;
 }
 
 .header__nav {

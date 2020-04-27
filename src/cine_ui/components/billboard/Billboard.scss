@@ -5,6 +5,7 @@
     padding-top: 25px;
     overflow-x: hidden;
     position: relative;
+    z-index: 0;
 }
 
 .billboard__background {
@@ -48,6 +49,7 @@
     margin: 0;
     padding: 0;
     color: $cine_white;
+    font-size: 30px;
 }
 
 .group__list {
