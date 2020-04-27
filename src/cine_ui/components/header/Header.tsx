@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, Dispatch } from "react";
 import "./Header.scss";
 import SearchBar from "./search_bar/SearchBar";
 import { Link } from "react-router-dom";
 
+const handleScroll = (setShouldHideHeader: Dispatch<React.SetStateAction<boolean>>) => {
+    return () => {
+        const { scrollTop: currentScrollTop } = document.documentElement || document.body;
+        setShouldHideHeader(currentScrollTop !== 0);
+    }
+};
+
 const Header: React.FC = () => {
+    const [shouldHideHeader, setShouldHideHeader] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll(setShouldHideHeader));
+        return () => window.removeEventListener('scroll', handleScroll(setShouldHideHeader));
+    }, []);
+
+    const activeStyle = shouldHideHeader ? 'active' : '';
+
     return (
-        <header className="header">
+        <header className={"header " + activeStyle}>
             <a className="header__logo" href="/">
                 <img
                     className="header__logo-image"

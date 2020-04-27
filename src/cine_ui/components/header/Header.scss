@@ -2,14 +2,24 @@
 
 .header {
     height: 70px;
-    background-color: $cine_black;
     display: flex;
     align-items: center;
     padding: 0 60px;
-    position: sticky;
     top: 0;
     font-weight: 400;
     z-index: 1;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, $cine_black 100%);
+    transition: 0.5s;
+    transition-delay: 0.2s;
+}
+
+.header.active {
+    background-color: $cine_black;
+    transition: 0.2s;
+    transition-delay: 0s;
 }
 
 .header__logo-image {
@@ -42,7 +52,8 @@
     color: $cine_light_gray;
 }
 
-.nav__option-anchor:hover, .nav__option-anchor:focus {
+.nav__option-anchor:hover,
+.nav__option-anchor:focus {
     color: $cine_white;
 }
 
