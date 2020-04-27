@@ -1,5 +1,6 @@
 import React from "react";
 import "./Billboard.scss";
+import { Link } from "react-router-dom";
 
 const images = [
     "http://image.tmdb.org/t/p/w500/cSKXdkm38HIMsZZNYJDIOtfOV9B.jpg",
@@ -34,7 +35,7 @@ const Movie = () => {
 const Group = () => {
     return (
         <div className="billboard__group">
-            <h2 className="billboard__title">Popular</h2>
+            <h2 className="billboard__title">Recently added</h2>
             <div className="group__list">
                 <Movie />
                 <Movie />
@@ -71,10 +72,12 @@ const Slideshow = () => {
                     <p className="slideshow__description">
                         Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town.
                     </p>
-                    <button className="slideshow__button">
-                        <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
-                        <span className="slideshow__button-text">Play</span>
-                    </button>
+                    <Link to="/watch">
+                        <button className="slideshow__button">
+                            <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
+                            <span className="slideshow__button-text">Play</span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

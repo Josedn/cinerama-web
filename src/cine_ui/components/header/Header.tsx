@@ -37,7 +37,7 @@ const Header: React.FC = () => {
                     </Link>
                 </li>
                 <li className="nav__option">
-                    <Link className="nav__option-anchor" to="/watch">
+                    <Link className="nav__option-anchor" to="/">
                         Movies
                     </Link>
                 </li>
