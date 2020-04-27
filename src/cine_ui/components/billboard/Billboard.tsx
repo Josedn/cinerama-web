@@ -40,6 +40,10 @@ const Group = () => {
                 <Movie />
                 <Movie />
                 <Movie />
+                <Movie />
+                <Movie />
+                <Movie />
+                <Movie />
             </div>
         </div>
     );
