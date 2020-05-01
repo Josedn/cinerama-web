@@ -3,10 +3,10 @@ import Header from "../../components/header/Header";
 import Billboard from "../../components/billboard/Billboard";
 import Footer from "../../components/footer/Footer";
 
-type HomeProps = {};
-type HomeState = {};
+type SearchProps = {};
+type SearchState = {};
 
-class Home extends React.Component<HomeProps, HomeState> {
+class Search extends React.Component<SearchProps, SearchState> {
     render() {
         return (
             <>
@@ -18,4 +18,4 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 }
 
-export default Home;
+export default Search;

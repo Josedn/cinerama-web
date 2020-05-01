@@ -42,7 +42,7 @@ const Header: React.FC = () => {
                     </Link>
                 </li>
                 <li className="nav__option">
-                    <Link className="nav__option-anchor" to="/">
+                    <Link className="nav__option-anchor" to="/search">
                         Search
                     </Link>
                 </li>
