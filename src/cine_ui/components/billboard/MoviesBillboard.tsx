@@ -3,13 +3,15 @@ import "./Billboard.scss";
 import Group from "./Group";
 import Background from "./Background";
 
-const SearchBillBoard: React.FC = () => {
+const MoviesBillboard: React.FC = () => {
     return (
         <div className="billboard">
             <Background />
-            <Group title="Search results" />
+            <Group title="Popular" />
+            <Group title="Staff picks" />
+            <Group title="New" />
         </div>
     );
 };
 
-export default SearchBillBoard;
+export default MoviesBillboard;

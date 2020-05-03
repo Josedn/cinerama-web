@@ -56,9 +56,9 @@
     font-weight: 400;
 }
 
-.group__list {
-    margin-top: 20px;
+.group__grid {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .slideshow {
@@ -153,7 +153,7 @@
 }
 
 .movie {
-    margin-right: 15px;
+    margin:20px 15px 0 0;
     color: $cine_light_gray;
     cursor: pointer;
     transition: 0.2s;

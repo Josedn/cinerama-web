@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Watch from "./pages/Watch/Watch";
 import CineEnvironment from "../cine_engine/CineEnvironment";
 import Search from "./pages/Search/Search";
+import Movies from "./pages/Movies/Movies";
 
 class CineUI extends React.Component {
     componentDidMount() {
@@ -17,6 +18,7 @@ class CineUI extends React.Component {
                 <Switch>
                     <Route path="/watch" component={Watch} />
                     <Route path="/search" component={Search} />
+                    <Route path="/movies" component={Movies} />
                     <Route component={Home} />
                 </Switch>
             </Router>

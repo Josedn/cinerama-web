@@ -10,7 +10,7 @@ const Group: React.FC<GroupProps> = (props: GroupProps) => {
     return (
         <div className="billboard__group">
             <h2 className="billboard__title">{title}</h2>
-            <div className="group__list">
+            <div className="group__grid">
                 <Movie />
                 <Movie />
                 <Movie />
