@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/header/Header";
-import Billboard from "../../components/billboard/Billboard";
+import SearchBillboard from "../../components/billboard/SearchBillboard";
 import Footer from "../../components/footer/Footer";
 
 type SearchProps = {};
@@ -11,7 +11,7 @@ class Search extends React.Component<SearchProps, SearchState> {
         return (
             <>
                 <Header></Header>
-                <Billboard></Billboard>
+                <SearchBillboard></SearchBillboard>
                 <Footer></Footer>
             </>
         );

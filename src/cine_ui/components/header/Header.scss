@@ -47,14 +47,13 @@
 }
 
 .nav__option-anchor {
-    transition: 0.2s;
+    transition: 0.5s;
     text-decoration: none;
     color: $cine_light_gray;
 }
 
-.nav__option-anchor:hover,
-.nav__option-anchor:focus {
-    color: $cine_white;
+.nav__option-anchor:hover:not(.nav__option-anchor--selected) {
+    color: $cine_dark_gray;
 }
 
 .nav__option-anchor--selected {

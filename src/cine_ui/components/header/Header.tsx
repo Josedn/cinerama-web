@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import SearchBar from "./search_bar/SearchBar";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
     const [shouldHideHeader, setShouldHideHeader] = useState(false);
@@ -29,29 +29,39 @@ const Header: React.FC = () => {
             </a>
             <ul className="header__nav">
                 <li className="nav__option">
-                    <Link
-                        className="nav__option-anchor nav__option-anchor--selected"
-                        to="/"
+                    <NavLink
+                        className="nav__option-anchor"
+                        activeClassName="nav__option-anchor--selected"
+                        exact to="/"
                     >
                         Home
-                    </Link>
+                    </NavLink>
                 </li>
                 <li className="nav__option">
-                    <Link className="nav__option-anchor" to="/">
+                    <NavLink
+                        className="nav__option-anchor"
+                        activeClassName="nav__option-anchor--selected"
+                        exact to="/movies">
                         Movies
-                    </Link>
+                    </NavLink>
                 </li>
                 <li className="nav__option">
-                    <Link className="nav__option-anchor" to="/search">
+                    <NavLink
+                        className="nav__option-anchor"
+                        activeClassName="nav__option-anchor--selected"
+                        exact to="/search">
                         Search
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
             <ul className="header__nav header__nav--options">
                 <li className="nav__option">
-                    <Link className="nav__option-anchor" to="/">
+                    <NavLink
+                        className="nav__option-anchor"
+                        activeClassName="nav__option-anchor--selected"
+                        exact to="/logout">
                         Logout
-                    </Link>
+                    </NavLink>
                 </li>
                 <li className="nav__option">
                     <SearchBar />

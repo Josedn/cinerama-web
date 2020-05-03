@@ -1,17 +1,15 @@
 import React from "react";
 import "./Billboard.scss";
-import Slideshow from "./Slideshow";
 import Group from "./Group";
 import Background from "./Background";
 
-const Billboard: React.FC = () => {
+const SearchBillBoard: React.FC = () => {
     return (
         <div className="billboard">
             <Background />
-            <Slideshow />
-            <Group title="recently added" />
+            <Group title="search results" />
         </div>
     );
 };
 
-export default Billboard;
+export default SearchBillBoard;
