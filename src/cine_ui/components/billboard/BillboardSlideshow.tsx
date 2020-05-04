@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../../../cine_engine/ui_models/Movie";
 
@@ -7,11 +7,17 @@ type SlideshowProps = {
 };
 
 const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
-    const randomImg = "https://img.yts.mx/assets/images/movies/Pulp_Fiction_1994/medium-cover.jpg";
-    const randomTitle = "Pulp Fiction";
+    const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+
+    const { movies } = props;
+    if (movies.length === 0) {
+        return <></>;
+    }
+
+    const currentMovie = movies[currentMovieIndex];
 
     const preview = <div className="slideshow__preview">
-        <img className="slideshow__image" src={randomImg} alt={randomTitle} />
+        <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} />
         <div className="slideshow__progress">
             <button className="slideshow__progress-box slideshow__progress-box--active"></button>
             <button className="slideshow__progress-box"></button>
@@ -20,12 +26,12 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
     </div>;
 
     const content = <div className="slideshow__content">
-        <h3 className="slideshow__title">{randomTitle}</h3>
-        <h4 className="slideshow__subtitle">1994</h4>
+        <h3 className="slideshow__title">{currentMovie.title}</h3>
+        <h4 className="slideshow__subtitle">{currentMovie.year}</h4>
         <p className="slideshow__description">
-            Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town.
-    </p>
-        <Link to="/watch">
+            {currentMovie.synopsis}
+        </p>
+        <Link to={"/watch/" + currentMovie.slug}>
             <button className="slideshow__button">
                 <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
                 <span className="slideshow__button-text">Play</span>
