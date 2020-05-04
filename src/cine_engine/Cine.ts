@@ -11,9 +11,10 @@ export default class Cine {
         this.movieFinder = new MovieFinder();
         this.cinePlayer = new CinePlayer();
         this.cineUniversal = new CineUniversal();
+        console.log('engine created');
     }
 
     initialize() {
-        
+        this.cineUniversal.loadLanguage('en');
     }
 }

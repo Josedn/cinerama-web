@@ -22,6 +22,12 @@ export default class CineUniversal {
             recentlyAdded: "Recently added",
         };
     }
+
+    loadLanguage(language: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(), 500);
+        });
+    }
 }
 
 export type HeaderTexts = {
