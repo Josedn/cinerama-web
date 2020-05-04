@@ -1,7 +1,6 @@
 export default class CineUniversal {
     header: HeaderTexts;
     footer: FooterTexts;
-    billboard: BillboardTexts;
 
     constructor() {
         this.header = {
@@ -16,10 +15,6 @@ export default class CineUniversal {
             dmca: "DMCA",
             terms: "Terms",
             contact: "Contact",
-        };
-
-        this.billboard = {
-            recentlyAdded: "Recently added",
         };
     }
 
@@ -42,8 +37,4 @@ export type FooterTexts = {
     dmca: string;
     terms: string;
     contact: string;
-};
-
-export type BillboardTexts = {
-    recentlyAdded: string;
 };

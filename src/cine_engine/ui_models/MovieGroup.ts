@@ -1,6 +1,6 @@
 import Movie from "./Movie";
 
-export default class BillboardGroup {
+export default class MovieGroup {
     title: string;
     movies: Movie[];
     constructor(title: string, movies: Movie[]) {

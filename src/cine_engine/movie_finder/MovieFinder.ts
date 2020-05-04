@@ -1,5 +1,6 @@
 import NProgress from 'nprogress';
 import Movie from "../ui_models/Movie";
+import MovieGroup from '../ui_models/MovieGroup';
 
 export default class MovieFinder {
     getSlideshowMovies(): Promise<Movie[]> {
@@ -10,6 +11,30 @@ export default class MovieFinder {
             setTimeout(() => {
                 NProgress.done();
                 resolve(harryPotters);
+            }, 1000);
+        });
+    }
+
+    getHomeMovieGroup(): Promise<MovieGroup> {
+        return new Promise((resolve, reject) => {
+
+            NProgress.start();
+
+            setTimeout(() => {
+                NProgress.done();
+                resolve(new MovieGroup("test", harryPotters));
+            }, 1000);
+        });
+    }
+
+    getExploreMovieGroups(): Promise<MovieGroup[]> {
+        return new Promise((resolve, reject) => {
+
+            NProgress.start();
+
+            setTimeout(() => {
+                NProgress.done();
+                resolve([new MovieGroup("Harry Potter saga", harryPotters), new MovieGroup("Staff picks", [pulp])]);
             }, 1000);
         });
     }

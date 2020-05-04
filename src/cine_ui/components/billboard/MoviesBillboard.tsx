@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Billboard.scss";
 import BillboardGroup from "./BillboardGroup";
 import Background from "./Background";
+import CineEnvironment from "../../../cine_engine/CineEnvironment";
+import MovieGroup from "../../../cine_engine/ui_models/MovieGroup";
 
 const MoviesBillboard: React.FC = () => {
+
+    const [movieGroups, setMovieGroups] = useState<MovieGroup[]>([]);
+
+    useEffect(() => {
+        CineEnvironment.getCine().movieFinder.getExploreMovieGroups().then(groups => {
+            setMovieGroups(groups);
+        });
+
+    }, []);
+
+    const showGroups = movieGroups.map(group => {
+        return <BillboardGroup title={group.title} movies={group.movies} />;
+    });
+
     return (
         <div className="billboard">
             <Background />
-            <BillboardGroup title="Popular" />
-            <BillboardGroup title="Staff picks" />
-            <BillboardGroup title="New" />
+            {showGroups}
         </div>
     );
 };

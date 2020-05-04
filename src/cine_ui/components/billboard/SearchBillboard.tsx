@@ -7,7 +7,7 @@ const SearchBillBoard: React.FC = () => {
     return (
         <div className="billboard">
             <Background />
-            <BillboardGroup title="Search results" />
+            <BillboardGroup title="Search results" movies={[]} />
         </div>
     );
 };

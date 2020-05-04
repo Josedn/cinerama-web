@@ -21,7 +21,6 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
 
     useEffect(() => {
         const moveNext = () => {
-            console.log('moving next' + currentMovieIndex);
             if (movies.length > 1 && currentMovieIndex < movies.length - 1) {
                 setCurrentMovieIndex(currentMovieIndex + 1);
             } else {
@@ -43,26 +42,28 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
     const currentMovie = movies[currentMovieIndex];
     const buttons = generateButtons(movies.length, currentMovieIndex, id => setCurrentMovieIndex(id));
 
-    const preview = <div className="slideshow__preview">
-        <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} />
-        <div className="slideshow__progress">
-            {buttons}
-        </div>
-    </div>;
+    const preview =
+        <div className="slideshow__preview">
+            <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} />
+            <div className="slideshow__progress">
+                {buttons}
+            </div>
+        </div>;
 
-    const content = <div className="slideshow__content">
-        <h3 className="slideshow__title">{currentMovie.title}</h3>
-        <h4 className="slideshow__subtitle">{currentMovie.year}</h4>
-        <p className="slideshow__description">
-            {currentMovie.synopsis}
-        </p>
-        <Link to={"/watch/" + currentMovie.slug}>
-            <button className="slideshow__button">
-                <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
-                <span className="slideshow__button-text">Play</span>
-            </button>
-        </Link>
-    </div>;
+    const content =
+        <div className="slideshow__content">
+            <h3 className="slideshow__title">{currentMovie.title}</h3>
+            <h4 className="slideshow__subtitle">{currentMovie.year}</h4>
+            <p className="slideshow__description">
+                {currentMovie.synopsis}
+            </p>
+            <Link to={"/watch/" + currentMovie.slug}>
+                <button className="slideshow__button">
+                    <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
+                    <span className="slideshow__button-text">Play</span>
+                </button>
+            </Link>
+        </div>;
 
     return (
         <div className="billboard__slideshow">
