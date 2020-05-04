@@ -10,7 +10,7 @@ const generateButtons = (total: number, activeIndex: number, onClick: (id: numbe
     const buttons: React.ReactNode[] = [];
     for (let i = 0; i < total; i++) {
         const className = i === activeIndex ? "slideshow__progress-box slideshow__progress-box--active" : "slideshow__progress-box";
-        buttons.push(<button key={i} onClick={() => onClick(i)} className={className}></button>);
+        buttons.push(<button key={i} onMouseEnter={() => onClick(i)} onClick={() => onClick(i)} className={className}></button>);
     }
     return buttons;
 };
