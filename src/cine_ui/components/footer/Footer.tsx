@@ -1,15 +1,18 @@
 import React from "react";
 import "./Footer.scss";
+import CineEnvironment from "../../../cine_engine/CineEnvironment";
 
 const Footer: React.FC = () => {
+
+    const { copyrightInfo, contact, dmca, terms } = CineEnvironment.getCine().cineUniversal.footer;
+
     return (
         <footer className="footer">
-            Filmstock.tv &copy; 2020 - All rights reserved to their respective owners
+            {copyrightInfo}
             <br />
-            <a href="/dmca">DMCA</a> - <a href="/terms">Terms</a> - <a href="/contact">Contact</a>
+            <a href="/dmca">{dmca}</a> - <a href="/terms">{terms}</a> - <a href="/contact">{contact}</a>
         </footer>
     );
 };
-
 
 export default Footer;

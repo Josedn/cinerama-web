@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import SearchBar from "./search_bar/SearchBar";
 import { NavLink } from "react-router-dom";
+import CineEnvironment from "../../../cine_engine/CineEnvironment";
 
 const Header: React.FC = () => {
     const [shouldHideHeader, setShouldHideHeader] = useState(false);
+
+    const { home, movies, logout, search } = CineEnvironment.getCine().cineUniversal.header;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,7 +37,7 @@ const Header: React.FC = () => {
                         activeClassName="nav__option-anchor--selected"
                         exact to="/"
                     >
-                        Home
+                        {home}
                     </NavLink>
                 </li>
                 <li className="nav__option">
@@ -42,7 +45,7 @@ const Header: React.FC = () => {
                         className="nav__option-anchor"
                         activeClassName="nav__option-anchor--selected"
                         exact to="/movies">
-                        Movies
+                        {movies}
                     </NavLink>
                 </li>
                 <li className="nav__option">
@@ -50,7 +53,7 @@ const Header: React.FC = () => {
                         className="nav__option-anchor"
                         activeClassName="nav__option-anchor--selected"
                         exact to="/search">
-                        Search
+                        {search}
                     </NavLink>
                 </li>
             </ul>
@@ -60,7 +63,7 @@ const Header: React.FC = () => {
                         className="nav__option-anchor"
                         activeClassName="nav__option-anchor--selected"
                         exact to="/logout">
-                        Logout
+                        {logout}
                     </NavLink>
                 </li>
                 <li className="nav__option">

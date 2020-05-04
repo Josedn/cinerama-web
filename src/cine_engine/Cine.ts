@@ -12,4 +12,8 @@ export default class Cine {
         this.cinePlayer = new CinePlayer();
         this.cineUniversal = new CineUniversal();
     }
+
+    initialize() {
+        
+    }
 }
