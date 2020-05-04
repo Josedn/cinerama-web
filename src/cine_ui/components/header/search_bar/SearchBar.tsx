@@ -30,7 +30,6 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
                 this.focusSearchInput();
             });
         };
-        console.log('re rendered');
     }
 
     componentWillUnmount() {
@@ -42,8 +41,16 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
         this.setState({
             searchText
         });
-        CineEnvironment.getCine().cineState.handleSearch(searchText);
     };
+
+    handleKeyDown = (evt: SyntheticEvent) => {
+        const event = evt.nativeEvent as KeyboardEvent;
+        const isEnter = event.which === 13;
+        const { searchText } = this.state;
+        if (isEnter) {
+            CineEnvironment.getCine().cineState.handleSearch(searchText);
+        }
+    }
 
     handleToggleSearch = (event?: SyntheticEvent) => {
         const { active, searchText } = this.state;
@@ -88,6 +95,7 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
                         value={searchText}
                         onChange={this.handleUpdateText}
                         ref={this.searchInput}
+                        onKeyDown={this.handleKeyDown}
                     />
                     <button
                         className="search-bar__button search-bar__button--close"
