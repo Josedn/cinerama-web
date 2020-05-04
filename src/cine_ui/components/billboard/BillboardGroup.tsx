@@ -1,14 +1,8 @@
 import React from "react";
 import MoviePreview from "./MoviePreview";
-import Movie from "../../../cine_engine/ui_models/Movie";
 import MovieGroup from "../../../cine_engine/ui_models/MovieGroup";
 
-type BillboardGroup = {
-    title: string,
-    movies: Movie[]
-};
-
-const BillboardGroup: React.FC<BillboardGroup> = (props: BillboardGroup) => {
+const BillboardGroup: React.FC<MovieGroup> = (props: MovieGroup) => {
     const { title, movies } = props;
     const moviePreviews = movies.map(movie => {
         return <MoviePreview key={movie._id} imgSrc={movie.images.banner} title={movie.title} />;

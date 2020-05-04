@@ -4,6 +4,10 @@ import SearchBar from "./search_bar/SearchBar";
 import { NavLink } from "react-router-dom";
 import CineEnvironment from "../../../cine_engine/CineEnvironment";
 
+const handleSearchClick = () => {
+    console.log('lol');
+};
+
 const Header: React.FC = () => {
     const [shouldHideHeader, setShouldHideHeader] = useState(false);
 
@@ -49,12 +53,9 @@ const Header: React.FC = () => {
                     </NavLink>
                 </li>
                 <li className="nav__option">
-                    <NavLink
-                        className="nav__option-anchor"
-                        activeClassName="nav__option-anchor--selected"
-                        exact to="/search">
+                    <button onClick={handleSearchClick} className="nav__option-anchor">
                         {search}
-                    </NavLink>
+                    </button>
                 </li>
             </ul>
             <ul className="header__nav header__nav--options">

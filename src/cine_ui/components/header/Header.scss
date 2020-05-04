@@ -50,6 +50,14 @@
     transition: 0.5s;
     text-decoration: none;
     color: $cine_light_gray;
+    background: none;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    text-transform: inherit;
+    display: inline;
+    padding: 0;
+    cursor: pointer;
 }
 
 .nav__option-anchor:hover:not(.nav__option-anchor--selected) {
