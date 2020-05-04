@@ -52,7 +52,7 @@ export default class MovieFinder {
             setTimeout(() => {
                 NProgress.done();
                 resolve(new MovieGroup("search: " + query, search));
-            }, 100);
+            }, 1000);
         });
     }
 

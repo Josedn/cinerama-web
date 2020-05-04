@@ -1,6 +1,7 @@
 export default class CineUniversal {
     header: HeaderTexts;
     footer: FooterTexts;
+    search: SearchTexts;
 
     constructor() {
         this.header = {
@@ -16,6 +17,10 @@ export default class CineUniversal {
             terms: "Terms",
             contact: "Contact",
         };
+
+        this.search = {
+            placeholder: "Titles, people, genres...",
+        }
     }
 
     loadLanguage(language: string): Promise<void> {
@@ -37,4 +42,8 @@ export type FooterTexts = {
     dmca: string;
     terms: string;
     contact: string;
+};
+
+export type SearchTexts = {
+    placeholder: string;
 };

@@ -46,8 +46,14 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
     handleKeyDown = (evt: SyntheticEvent) => {
         const event = evt.nativeEvent as KeyboardEvent;
         const isEnter = event.which === 13;
-        const { searchText } = this.state;
         if (isEnter) {
+            this.submitSearch();
+        }
+    }
+
+    submitSearch = () => {
+        const { searchText } = this.state;
+        if (searchText.length > 0) {
             CineEnvironment.getCine().cineState.handleSearch(searchText);
         }
     }
@@ -60,14 +66,23 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
             }, () => {
                 this.focusSearchInput();
             });
+        } else {
+            this.submitSearch();
         }
     };
 
     handleCancelSearch = (event: SyntheticEvent) => {
-        this.setState({
-            searchText: ""
-        });
-        this.focusSearchInput();
+        const { searchText } = this.state;
+        if (searchText.length > 0) {
+            this.setState({
+                searchText: ""
+            });
+            this.focusSearchInput();
+        } else {
+            this.setState({
+                active: false
+            });
+        }
     };
 
     focusSearchInput = () => {
@@ -78,6 +93,8 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
 
     render() {
         const { searchText, active } = this.state;
+
+        const { placeholder } = CineEnvironment.getCine().cineUniversal.search;
 
         if (active || searchText.length > 0) {
             return (
@@ -91,7 +108,7 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
                     <input
                         className="search-bar__input"
                         type="text"
-                        placeholder="Títulos, personas, géneros"
+                        placeholder={placeholder}
                         value={searchText}
                         onChange={this.handleUpdateText}
                         ref={this.searchInput}
