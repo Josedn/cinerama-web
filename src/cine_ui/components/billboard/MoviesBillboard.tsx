@@ -1,15 +1,15 @@
 import React from "react";
 import "./Billboard.scss";
-import Group from "./Group";
+import BillboardGroup from "./BillboardGroup";
 import Background from "./Background";
 
 const MoviesBillboard: React.FC = () => {
     return (
         <div className="billboard">
             <Background />
-            <Group title="Popular" />
-            <Group title="Staff picks" />
-            <Group title="New" />
+            <BillboardGroup title="Popular" />
+            <BillboardGroup title="Staff picks" />
+            <BillboardGroup title="New" />
         </div>
     );
 };

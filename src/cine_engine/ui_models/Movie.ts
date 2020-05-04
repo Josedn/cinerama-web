@@ -1,6 +1,6 @@
 export default class Movie {
-    id: string;
-    imdbId: string;
+    _id: string;
+    imdb_id: string;
     title: string;
     year: string;
     synopsis: string;
@@ -13,8 +13,8 @@ export default class Movie {
     }
 
     constructor(id: string, imdbId: string, title: string, year: string, synopsis: string, runtime: number, trailer: string, banner: string, fanart: string, poster: string) {
-        this.id = id;
-        this.imdbId = imdbId;
+        this._id = id;
+        this.imdb_id = imdbId;
         this.title = title;
         this.year = year;
         this.synopsis = synopsis;

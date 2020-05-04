@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../components/header/Header";
-import MoviesBillboard from "../../components/billboard/MoviesBillboard";
-import Footer from "../../components/footer/Footer";
+import Header from "../components/header/Header";
+import MoviesBillboard from "../components/billboard/MoviesBillboard";
+import Footer from "../components/footer/Footer";
 
 type MoviesProps = {};
 type MoviesState = {};

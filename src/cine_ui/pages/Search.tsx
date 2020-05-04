@@ -1,8 +1,8 @@
 import React from "react";
 import NProgress from 'nprogress';
-import Header from "../../components/header/Header";
-import SearchBillboard from "../../components/billboard/SearchBillboard";
-import Footer from "../../components/footer/Footer";
+import Header from "../components/header/Header";
+import SearchBillboard from "../components/billboard/SearchBillboard";
+import Footer from "../components/footer/Footer";
 
 type SearchProps = {};
 type SearchState = {};

@@ -1,5 +1,5 @@
 import React from "react";
-import Player from "../../components/player/Player";
+import Player from "../components/player/Player";
 
 type WatchProps = {};
 type WatchState = {};

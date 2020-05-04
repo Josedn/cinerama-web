@@ -17,7 +17,7 @@ const titles = [
     "star wars: episode iv - a new hope"
 ];
 
-const Movie = () => {
+const MoviePreview = () => {
     const randomImg = images[Math.floor(images.length * Math.random())];
     const randomTitle = titles[Math.floor(titles.length * Math.random())];
     return (
@@ -30,4 +30,4 @@ const Movie = () => {
     );
 };
 
-export default Movie;
+export default MoviePreview;
