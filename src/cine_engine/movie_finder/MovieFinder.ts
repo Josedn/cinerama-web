@@ -39,6 +39,23 @@ export default class MovieFinder {
         });
     }
 
+    searchMovies(query: string): Promise<MovieGroup> {
+        return new Promise((resolve, reject) => {
+
+            NProgress.start();
+
+            query = query.toLowerCase();
+            const search = harryPotters.concat(pulp).filter(movie => {
+                return (movie as Movie).title.toLowerCase().includes(query);
+            });
+
+            setTimeout(() => {
+                NProgress.done();
+                resolve(new MovieGroup("search: " + query, search));
+            }, 100);
+        });
+    }
+
 }
 
 const pulp: Movie = {

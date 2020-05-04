@@ -3,27 +3,25 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./CineUI.scss";
 import Home from "./pages/Home";
 import Watch from "./pages/Watch";
-import CineEnvironment from "../cine_engine/CineEnvironment";
 import Search from "./pages/Search";
 import Movies from "./pages/Movies";
+import Constants from "../cine_engine/misc/Constants";
+import Header from "./components/header/Header";
+import Redirector from "./components/generic/Redirector";
 
-class CineUI extends React.Component {
-    componentDidMount() {
-        CineEnvironment.getCine();
-    }
-
-    render() {
-        return (
-            <Router>
-                <Switch>
-                    <Route path="/watch" component={Watch} />
-                    <Route path="/search" component={Search} />
-                    <Route path="/movies" component={Movies} />
-                    <Route component={Home} />
-                </Switch>
-            </Router>
-        );
-    }
+const CineUI: React.FC = () => {
+    return (
+        <Router>
+            <Header></Header>
+            <Switch>
+                <Route path={Constants.PAGES.WATCH.url} component={Watch} />
+                <Route path={Constants.PAGES.SEARCH.url} component={Search} />
+                <Route path={Constants.PAGES.EXPLORE.url} component={Movies} />
+                <Route component={Home} />
+            </Switch>
+            <Redirector />
+        </Router>
+    );
 }
 
 export default CineUI;

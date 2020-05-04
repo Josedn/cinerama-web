@@ -1,5 +1,6 @@
 import React, { ChangeEvent, SyntheticEvent, RefObject } from "react";
 import "./SearchBar.scss";
+import CineEnvironment from "../../../../cine_engine/CineEnvironment";
 
 type SearchBarProps = {};
 
@@ -21,13 +22,30 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
         this.state = initialState;
     }
 
+    componentDidMount() {
+        CineEnvironment.getCine().cineState.onStartSearch = () => {
+            this.setState({
+                active: true
+            }, () => {
+                this.focusSearchInput();
+            });
+        };
+        console.log('re rendered');
+    }
+
+    componentWillUnmount() {
+        CineEnvironment.getCine().cineState.onStartSearch = () => { };
+    }
+
     handleUpdateText = (event: ChangeEvent<HTMLInputElement>) => {
+        const searchText = event.target.value;
         this.setState({
-            searchText: event.target.value
+            searchText
         });
+        CineEnvironment.getCine().cineState.handleSearch(searchText);
     };
 
-    handleToggleSearch = (event: SyntheticEvent) => {
+    handleToggleSearch = (event?: SyntheticEvent) => {
         const { active, searchText } = this.state;
         if (searchText.length === 0) {
             this.setState({
