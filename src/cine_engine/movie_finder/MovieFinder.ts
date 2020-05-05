@@ -10,8 +10,8 @@ export default class MovieFinder {
 
             setTimeout(() => {
                 NProgress.done();
-                resolve(harryPotters);
-            }, 1000);
+                resolve([godfather2, pulp]);
+            }, 400);
         });
     }
 
@@ -22,8 +22,8 @@ export default class MovieFinder {
 
             setTimeout(() => {
                 NProgress.done();
-                resolve(new MovieGroup("test", harryPotters));
-            }, 1000);
+                resolve(new MovieGroup("Harry Potter week", harryPotters));
+            }, 400);
         });
     }
 
@@ -35,7 +35,7 @@ export default class MovieFinder {
             setTimeout(() => {
                 NProgress.done();
                 resolve([new MovieGroup("Harry Potter saga", harryPotters), new MovieGroup("Staff picks", [pulp])]);
-            }, 1000);
+            }, 400);
         });
     }
 
@@ -45,18 +45,70 @@ export default class MovieFinder {
             NProgress.start();
 
             query = query.toLowerCase();
-            const search = harryPotters.concat(pulp).filter(movie => {
+            const search = harryPotters.concat([pulp, godfather2]).filter(movie => {
                 return (movie as Movie).title.toLowerCase().includes(query);
             });
 
             setTimeout(() => {
                 NProgress.done();
                 resolve(new MovieGroup("search: " + query, search));
-            }, 1000);
+            }, 400);
         });
     }
 
 }
+
+const godfather2: any = {
+    "_id": "tt0071562",
+    "imdb_id": "tt0071562",
+    "title": "The Godfather: Part II",
+    "year": "1974",
+    "slug": "the-godfather-part-ii-1974",
+    "synopsis": "In the continuing saga of the Corleone crime family, a young Vito Corleone grows up in Sicily and in 1910s New York. In the 1950s, Michael Corleone attempts to expand the family business into Las Vegas, Hollywood and Cuba.",
+    "runtime": "202",
+    "country": "en",
+    "last_updated": 1579135616359,
+    "released": 156729600,
+    "certification": "R",
+    "torrents": {
+        "en": {
+            "1080p": {
+                "provider": "YTS",
+                "filesize": "2.70 GB",
+                "size": 2899102925,
+                "peer": 74,
+                "seed": 310,
+                "url": "magnet:?xt=urn:btih:6C9124FE9A99B2001FAD76A76152691BC515A80D&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://tracker.leechers-paradise.org:6969&tr=udp://p4p.arenabg.ch:1337&tr=udp://tracker.internetwarriors.net:1337"
+            },
+            "720p": {
+                "provider": "YTS",
+                "filesize": "1.30 GB",
+                "size": 1395864371,
+                "peer": 78,
+                "seed": 513,
+                "url": "magnet:?xt=urn:btih:B27022D09BC067D46BBDB65AE62348AB3F21C727&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://tracker.leechers-paradise.org:6969&tr=udp://p4p.arenabg.ch:1337&tr=udp://tracker.internetwarriors.net:1337"
+            }
+        }
+    },
+    "trailer": "//youtube.com/watch?v=9O1Iy9od7-A",
+    "genres": [
+        "crime",
+        "drama"
+    ],
+    "images": {
+        "banner": "//img.yts.mx/assets/images/movies/The_Godfather_Part_II_1974/medium-cover.jpg",
+        "fanart": "//images6.alphacoders.com/617/thumb-1920-617286.jpg",
+        "poster": "//img.yts.mx/assets/images/movies/The_Godfather_Part_II_1974/medium-cover.jpg"
+    },
+    "rating": {
+        "hated": 100,
+        "loved": 100,
+        "votes": 12275,
+        "watching": 0,
+        "percentage": 88
+    },
+    "__v": 0
+};
 
 const pulp: Movie = {
     "_id": "tt0110912",
@@ -66,11 +118,11 @@ const pulp: Movie = {
     "slug": "pulp-fiction-1994",
     "synopsis": "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.",
     "runtime": 154,
-    "trailer": "http://youtube.com/watch?v=tGpTpVyI_OQ",
+    "trailer": "//youtube.com/watch?v=tGpTpVyI_OQ",
     "images": {
-        "banner": "http://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
-        "fanart": "http://image.tmdb.org/t/p/w500/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
-        "poster": "http://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
+        "banner": "//image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+        "fanart": "/images/pulp-fiction1.jpg",
+        "poster": "//image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
     }
 };
 
@@ -107,16 +159,16 @@ const harryPotters: any[] = [
                 }
             }
         },
-        "trailer": "http://youtube.com/watch?v=PFWAOnvMd1Q",
+        "trailer": "//youtube.com/watch?v=PFWAOnvMd1Q",
         "genres": [
             "adventure",
             "fantasy",
             "family"
         ],
         "images": {
-            "banner": "http://image.tmdb.org/t/p/w500/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg",
-            "fanart": "http://image.tmdb.org/t/p/w500/gzKW3emulMxIHzuXxZoyDB1lei9.jpg",
-            "poster": "http://image.tmdb.org/t/p/w500/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg"
+            "banner": "//image.tmdb.org/t/p/w500/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg",
+            "fanart": "//image.tmdb.org/t/p/w500/gzKW3emulMxIHzuXxZoyDB1lei9.jpg",
+            "poster": "//image.tmdb.org/t/p/w500/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg"
         },
         "rating": {
             "hated": 100,
@@ -159,16 +211,16 @@ const harryPotters: any[] = [
                 }
             }
         },
-        "trailer": "http://youtube.com/watch?v=WIj9DYJ5EKk",
+        "trailer": "//youtube.com/watch?v=WIj9DYJ5EKk",
         "genres": [
             "adventure",
             "fantasy",
             "mystery"
         ],
         "images": {
-            "banner": "http://image.tmdb.org/t/p/w500/sMMjm3NCC3qiDxwVJZd554nCt98.jpg",
-            "fanart": "http://image.tmdb.org/t/p/w500/gGt4ePOhD8ilxd3FYhKB06L2CyG.jpg",
-            "poster": "http://image.tmdb.org/t/p/w500/sMMjm3NCC3qiDxwVJZd554nCt98.jpg"
+            "banner": "//image.tmdb.org/t/p/w500/sMMjm3NCC3qiDxwVJZd554nCt98.jpg",
+            "fanart": "//image.tmdb.org/t/p/w500/gGt4ePOhD8ilxd3FYhKB06L2CyG.jpg",
+            "poster": "//image.tmdb.org/t/p/w500/sMMjm3NCC3qiDxwVJZd554nCt98.jpg"
         },
         "rating": {
             "hated": 100,
@@ -211,16 +263,16 @@ const harryPotters: any[] = [
                 }
             }
         },
-        "trailer": "http://youtube.com/watch?v=PbdM1db3JbY",
+        "trailer": "//youtube.com/watch?v=PbdM1db3JbY",
         "genres": [
             "adventure",
             "fantasy",
             "family"
         ],
         "images": {
-            "banner": "http://image.tmdb.org/t/p/w500/gHPtCmMeDqjaGqnMrWGDmD3nKd2.jpg",
-            "fanart": "http://image.tmdb.org/t/p/w500/hziiv14OpD73u9gAak4XDDfBKa2.jpg",
-            "poster": "http://image.tmdb.org/t/p/w500/gHPtCmMeDqjaGqnMrWGDmD3nKd2.jpg"
+            "banner": "//image.tmdb.org/t/p/w500/gHPtCmMeDqjaGqnMrWGDmD3nKd2.jpg",
+            "fanart": "//image.tmdb.org/t/p/w500/hziiv14OpD73u9gAak4XDDfBKa2.jpg",
+            "poster": "//image.tmdb.org/t/p/w500/gHPtCmMeDqjaGqnMrWGDmD3nKd2.jpg"
         },
         "rating": {
             "hated": 100,
@@ -263,15 +315,15 @@ const harryPotters: any[] = [
                 }
             }
         },
-        "trailer": "http://youtube.com/watch?v=R69laoH02xg",
+        "trailer": "//youtube.com/watch?v=R69laoH02xg",
         "genres": [
             "adventure",
             "fantasy"
         ],
         "images": {
-            "banner": "http://image.tmdb.org/t/p/w500/uDQibffYgssdiqx7izO57wdLc6.jpg",
-            "fanart": "http://image.tmdb.org/t/p/w500/vbk5CfaAHOjQPSAcYm6AoRRz2Af.jpg",
-            "poster": "http://image.tmdb.org/t/p/w500/uDQibffYgssdiqx7izO57wdLc6.jpg"
+            "banner": "//image.tmdb.org/t/p/w500/uDQibffYgssdiqx7izO57wdLc6.jpg",
+            "fanart": "//image.tmdb.org/t/p/w500/vbk5CfaAHOjQPSAcYm6AoRRz2Af.jpg",
+            "poster": "//image.tmdb.org/t/p/w500/uDQibffYgssdiqx7izO57wdLc6.jpg"
         },
         "rating": {
             "hated": 100,
@@ -314,15 +366,15 @@ const harryPotters: any[] = [
                 }
             }
         },
-        "trailer": "http://youtube.com/watch?v=9hXH0Ackz6w",
+        "trailer": "//youtube.com/watch?v=9hXH0Ackz6w",
         "genres": [
             "adventure",
             "fantasy"
         ],
         "images": {
-            "banner": "http://image.tmdb.org/t/p/w500/bk1EWfRW0U76sWZiLDL1T7J0XV9.jpg",
-            "fanart": "http://image.tmdb.org/t/p/w500/8YA36faYlkpfp6aozcGsqq68pZ9.jpg",
-            "poster": "http://image.tmdb.org/t/p/w500/bk1EWfRW0U76sWZiLDL1T7J0XV9.jpg"
+            "banner": "//image.tmdb.org/t/p/w500/bk1EWfRW0U76sWZiLDL1T7J0XV9.jpg",
+            "fanart": "//image.tmdb.org/t/p/w500/8YA36faYlkpfp6aozcGsqq68pZ9.jpg",
+            "poster": "//image.tmdb.org/t/p/w500/bk1EWfRW0U76sWZiLDL1T7J0XV9.jpg"
         },
         "rating": {
             "hated": 100,

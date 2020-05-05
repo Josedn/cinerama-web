@@ -3,8 +3,8 @@ import MovieGroup from "../ui_models/MovieGroup";
 import CineEnvironment from "../CineEnvironment";
 
 export default class CineState {
-    currentBackground?: string;
-    currentSearch: string;
+    currentBackground: string;
+    private currentSearch: string;
 
     onStartSearch: () => void;
     onChangeBackground: (imgSrc: string) => void;
@@ -12,7 +12,7 @@ export default class CineState {
     onUpdateSearchResults: (searchResult: MovieGroup) => void;
 
     constructor() {
-        this.currentBackground = undefined;
+        this.currentBackground = "";
         this.currentSearch = "";
         this.onStartSearch = () => { };
         this.onChangeBackground = () => { };

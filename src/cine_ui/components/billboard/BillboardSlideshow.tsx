@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../../../cine_engine/ui_models/Movie";
+import CineEnvironment from "../../../cine_engine/CineEnvironment";
 
 type SlideshowProps = {
     movies: Movie[]
@@ -41,6 +42,9 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
 
     const currentMovie = movies[currentMovieIndex];
     const buttons = generateButtons(movies.length, currentMovieIndex, id => setCurrentMovieIndex(id));
+
+    
+    CineEnvironment.getCine().cineState.handleChangeBackground(currentMovie.images.fanart);
 
     const preview =
         <div className="slideshow__preview">

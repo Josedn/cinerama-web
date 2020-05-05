@@ -19,7 +19,7 @@ export default class CineUniversal {
         };
 
         this.search = {
-            placeholder: "Titles, people, genres...",
+            placeholder: "Movies, people, genres...",
         }
     }
 
