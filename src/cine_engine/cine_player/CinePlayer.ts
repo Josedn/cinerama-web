@@ -12,13 +12,13 @@ export default class CinePlayer {
         return max;
     }
 
-    constructor(container: HTMLVideoElement, onPause: () => void, onPlay: () => void, onTimeUpdate: (currentTime: number, durationTime: number, bufferedTime: number) => void) {
+    constructor(container: HTMLVideoElement, onPause: () => void, onPlay: () => void, onTimeUpdate: (currentTime: number, durationTime: number, bufferedTime: TimeRanges) => void) {
         this.container = container;
 
         container.onpause = onPause;
         container.onplay = onPlay;
         container.ontimeupdate = () => {
-            onTimeUpdate(container.currentTime, container.duration, this.getBufferedTime());
+            onTimeUpdate(container.currentTime, container.duration, container.buffered);
         };
 
         console.log('cineplayer created');

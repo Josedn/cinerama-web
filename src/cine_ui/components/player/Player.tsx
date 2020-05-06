@@ -17,16 +17,18 @@ type PlayerState = {
     currentTime: number; //seconds
     durationTime: number; //seconds
     peekPosition: number; //seconds
-    bufferedTime: number; //seconds
+    bufferedTime: TimeRanges; //seconds
     fullscreen: boolean;
+    showingMenu: boolean;
 };
 const initialState: PlayerState = {
     playing: false,
     currentTime: 0,
     durationTime: -1,
     peekPosition: -1,
-    bufferedTime: -1,
+    bufferedTime: { end: () => 0, length: 0, start: () => 0 },
     fullscreen: false,
+    showingMenu: true,
 };
 
 class Player extends React.Component<PlayerProps, PlayerState> {
@@ -34,6 +36,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
     scrubberRef: RefObject<HTMLDivElement>;
     mainPlayerRef: RefObject<HTMLDivElement>;
     cinePlayer?: CinePlayer;
+    showMenuTimeoutId: number;
 
     constructor(props: PlayerProps) {
         super(props);
@@ -41,6 +44,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
         this.videoRef = React.createRef();
         this.scrubberRef = React.createRef();
         this.mainPlayerRef = React.createRef();
+        this.showMenuTimeoutId = 0;
     }
 
     componentDidMount() {
@@ -54,7 +58,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                 playing: true,
             });
         };
-        const onTimeUpdate = (currentTime: number, durationTime: number, bufferedTime: number) => {
+        const onTimeUpdate = (currentTime: number, durationTime: number, bufferedTime: TimeRanges) => {
             this.setState({
                 currentTime,
                 durationTime,
@@ -65,10 +69,14 @@ class Player extends React.Component<PlayerProps, PlayerState> {
             this.cinePlayer = new CinePlayer(this.videoRef.current, onPause, onPlay, onTimeUpdate);
         }
         if (this.mainPlayerRef.current != null) {
-            this.mainPlayerRef.current.addEventListener('fullscreenchange', (event) => {
+            this.mainPlayerRef.current.addEventListener('fullscreenchange', event => {
                 this.setState({
                     fullscreen: document.fullscreenElement != null,
                 });
+            });
+
+            this.mainPlayerRef.current.addEventListener('mousemove', event => {
+                this.showMenu();
             });
         }
     }
@@ -77,6 +85,21 @@ class Player extends React.Component<PlayerProps, PlayerState> {
         if (this.cinePlayer != null) {
             this.cinePlayer.dispose();
         }
+    }
+
+    showMenu() {
+        clearTimeout(this.showMenuTimeoutId);
+        this.setState({
+            showingMenu: true,
+        });
+
+        const intervalId = setTimeout(() => {
+            this.setState({
+                showingMenu: false,
+            });
+        }, 3000) as any; //NodeJS.Timeout --> number
+
+        this.showMenuTimeoutId = intervalId;
     }
 
     handleProgressPeekMove = (event: SyntheticEvent<HTMLDivElement>) => {
@@ -103,36 +126,40 @@ class Player extends React.Component<PlayerProps, PlayerState> {
         });
     }
 
+    isPeeking() {
+        return this.state.peekPosition >= 0;
+    }
+
     getCurrentClock = () => {
-        const { currentTime, durationTime } = this.state;
+        const { currentTime, durationTime, peekPosition } = this.state;
         if (durationTime === -1) {
             return secondsToTime(0);
+        }
+        if (this.isPeeking()) {
+            return secondsToTime(peekPosition);
         }
         return secondsToTime(durationTime - currentTime);
     }
 
-    getProgressPercent = () => {
-        const { currentTime, durationTime } = this.state;
-        if (durationTime === -1) {
+    calculateTimePercent = (seconds: number) => {
+        const { durationTime } = this.state;
+        if (durationTime < 1) {
             return 0;
         }
-        return (currentTime / durationTime) * 100;
+        return (seconds / durationTime) * 100;
+    }
+
+    getProgressPercent = () => {
+        const { currentTime } = this.state;
+        return this.calculateTimePercent(currentTime);
     }
 
     getPlayHeadPercent = () => {
-        const { durationTime, peekPosition } = this.state;
-        if (peekPosition === -1 || durationTime === -1) {
-            return this.getProgressPercent();
+        const { peekPosition } = this.state;
+        if (this.isPeeking()) {
+            return this.calculateTimePercent(peekPosition);
         }
-        return (peekPosition / durationTime) * 100;
-    }
-
-    getBufferedPercent = () => {
-        const { bufferedTime, durationTime } = this.state;
-        if (durationTime === -1) {
-            return 0;
-        }
-        return (bufferedTime / durationTime) * 100;
+        return this.getProgressPercent();
     }
 
     handlePlayPauseClick = () => {
@@ -159,6 +186,27 @@ class Player extends React.Component<PlayerProps, PlayerState> {
         }
     }
 
+    handleMiscClick = () => {
+        const { showingMenu } = this.state;
+        this.setState({
+            showingMenu: !showingMenu
+        });
+    }
+
+    renderBufferedProgress = () => {
+        const { bufferedTime, durationTime } = this.state;
+        const nodes: React.ReactNode[] = [];
+        if (durationTime === -1) {
+            return nodes;
+        }
+        for (let i = 0; i < bufferedTime.length; i++) {
+            const start = this.calculateTimePercent(bufferedTime.start(i));
+            const end = this.calculateTimePercent(bufferedTime.end(i)) - start;
+            nodes.push(<div key={i} className="scrubber__buffered" style={{ left: start + "%", width: end + "%" }}></div>);
+        }
+        return nodes;
+    }
+
     renderProgressBar() {
         return (
             <div className="control__progress-container">
@@ -166,7 +214,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                     <div className="scrubber__container" onMouseMove={this.handleProgressPeekMove} onMouseEnter={this.handleProgressPeekStart} onMouseLeave={this.handleProgressPeekStop}>
                         <div className="scrubber__bar">
                             <div className="scrubber__track" ref={this.scrubberRef} onClick={this.handleProgressPeekClick}>
-                                <div className="scrubber__buffered" style={{ width: this.getBufferedPercent() + "%" }}></div>
+                                {this.renderBufferedProgress()}
                                 <div className="scrubber__progress" style={{ width: this.getPlayHeadPercent() + "%" }}></div>
                                 <div className="scrubber__play-head" style={{ width: this.getPlayHeadPercent() + "%" }}></div>
                             </div>
@@ -201,7 +249,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                 <div className="control__title">
                     {title}
                 </div>
-                <button className="control__button">
+                <button className="control__button" onClick={this.handleMiscClick}>
                     <i className="fa fa-question-circle-o control__button-icon" aria-hidden="true"></i>
                 </button>
                 <button className="control__button">
@@ -216,19 +264,28 @@ class Player extends React.Component<PlayerProps, PlayerState> {
 
     render() {
         const { src, type } = this.props;
+        const { showingMenu } = this.state;
         const { unsupportedHtmlVideo } = CineEnvironment.getCine().cineUniversal.player;
+
+        const backdropClass = showingMenu ? "player__backdrop--active" : "";
+        const controlsClass = showingMenu ? "control--active" : "";
 
         return (
             <div ref={this.mainPlayerRef} className="player">
-                <video ref={this.videoRef} className="player__video">
+                <video ref={this.videoRef} className="player__video" autoPlay>
                     <source src={src} type={type} />
                     {unsupportedHtmlVideo}
                 </video>
 
                 <div className="player__control-zone">
-                    <div className="player__backdrop--active player__backdrop-top"></div>
-                    <div className="player__backdrop--active player__backdrop-bottom"></div>
-                    <div className="control__top">
+                    <div className={"player__backdrop-top " + backdropClass}></div>
+                    <div className={"player__backdrop-bottom " + backdropClass}></div>
+                    <img
+                        className={"control__logo " + controlsClass}
+                        src="/images/filmstock_white.svg"
+                        alt="Filmstock"
+                    ></img>
+                    <div className={"control__top " + controlsClass}>
                         <div className="control__buttons">
                             <Link to={Constants.PAGES.HOME.url}>
                                 <button className="control__button">
@@ -237,7 +294,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                             </Link>
                         </div>
                     </div>
-                    <div className="control__bottom">
+                    <div className={"control__bottom " + controlsClass}>
                         {this.renderProgressBar()}
                         {this.renderControlButtons()}
                     </div>
