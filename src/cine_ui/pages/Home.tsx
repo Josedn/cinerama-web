@@ -1,11 +1,11 @@
 import React from "react";
-import Billboard from "../components/billboard/Billboard";
+import HomeBillboard from "../components/billboard/HomeBillboard";
 import Footer from "../components/footer/Footer";
 
 const Home: React.FC = () => {
     return (
         <>
-            <Billboard></Billboard>
+            <HomeBillboard></HomeBillboard>
             <Footer></Footer>
         </>
     );

@@ -7,7 +7,7 @@ export default class CineUniversal {
     constructor() {
         this.header = {
             home: "Home",
-            movies: "Movies",
+            explore: "Movies",
             search: "Search",
             logout: "Log in"
         };
@@ -37,7 +37,7 @@ export default class CineUniversal {
 
 export type HeaderTexts = {
     home: string;
-    movies: string;
+    explore: string;
     search: string;
     logout: string;
 };

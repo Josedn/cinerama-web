@@ -6,7 +6,7 @@ export default class Constants {
         },
         EXPLORE: {
             id: "explore",
-            url: "/movies"
+            url: "/explore"
         },
         SEARCH: {
             id: "search",
@@ -15,6 +15,10 @@ export default class Constants {
         WATCH: {
             id: "watch",
             url: "/watch"
+        },
+        MOVIE: {
+            id: "movie",
+            url: "/movie"
         },
         LOGOUT: {
             id: "logout",

@@ -13,7 +13,7 @@ const handleSearchClick = (event: SyntheticEvent) => {
 
 const Header: React.FC = () => {
     const [shouldHideHeader, setShouldHideHeader] = useState(false);
-    const { home, movies, logout, search } = CineEnvironment.getCine().cineUniversal.header;
+    const { home, explore, logout, search } = CineEnvironment.getCine().cineUniversal.header;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                         className="nav__option-anchor"
                         activeClassName="nav__option-anchor--selected"
                         exact to={Constants.PAGES.EXPLORE.url}>
-                        {movies}
+                        {explore}
                     </NavLink>
                 </li>
                 <li className="nav__option">

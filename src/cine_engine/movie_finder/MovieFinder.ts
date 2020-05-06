@@ -58,7 +58,7 @@ export default class MovieFinder {
 
 }
 
-const godfather2: any = {
+export const godfather2: any = {
     "_id": "tt0071562",
     "imdb_id": "tt0071562",
     "title": "The Godfather: Part II",

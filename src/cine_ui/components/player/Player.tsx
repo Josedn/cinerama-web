@@ -78,6 +78,10 @@ class Player extends React.Component<PlayerProps, PlayerState> {
             this.mainPlayerRef.current.addEventListener('mousemove', event => {
                 this.showMenu();
             });
+
+            this.mainPlayerRef.current.addEventListener('dblclick', event => {
+                this.handleFullscreenClick();
+            });
         }
     }
 
@@ -164,6 +168,7 @@ class Player extends React.Component<PlayerProps, PlayerState> {
 
     handlePlayPauseClick = () => {
         if (this.cinePlayer != null) {
+            this.showMenu();
             this.cinePlayer.doPlayPause();
         }
     }
