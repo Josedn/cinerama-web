@@ -8,7 +8,7 @@ export default class CineUniversal {
             home: "Home",
             movies: "Movies",
             search: "Search",
-            logout: "Logout"
+            logout: "Log in"
         };
 
         this.footer = {

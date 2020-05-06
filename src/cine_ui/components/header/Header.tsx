@@ -57,6 +57,11 @@ const Header: React.FC = () => {
                         {search}
                     </button>
                 </li>
+                <li className="nav__option">
+                    <button onClick={handleSearchClick} className="nav__option-anchor">
+                        Party
+                    </button>
+                </li>
             </ul>
             <ul className="header__nav header__nav--options">
                 <li className="nav__option">
