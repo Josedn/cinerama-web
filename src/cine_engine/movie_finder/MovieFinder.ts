@@ -110,7 +110,7 @@ const godfather2: any = {
     "__v": 0
 };
 
-const pulp: Movie = {
+export const pulp: Movie = {
     "_id": "tt0110912",
     "imdb_id": "tt0110912",
     "title": "Pulp Fiction",

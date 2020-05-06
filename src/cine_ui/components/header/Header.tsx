@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SyntheticEvent } from "react";
 import "./Header.scss";
 import SearchBar from "./search_bar/SearchBar";
 import { NavLink, Link } from "react-router-dom";
 import CineEnvironment from "../../../cine_engine/CineEnvironment";
 import Constants from "../../../cine_engine/misc/Constants";
 
-const handleSearchClick = () => {
+const handleSearchClick = (event: SyntheticEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     CineEnvironment.getCine().cineState.handleStartSearch();
 };
 
@@ -53,12 +55,16 @@ const Header: React.FC = () => {
                     </NavLink>
                 </li>
                 <li className="nav__option">
-                    <button onClick={handleSearchClick} className="nav__option-anchor">
+                    <NavLink
+                        to="/search"
+                        onClick={handleSearchClick}
+                        className="nav__option-anchor"
+                        activeClassName="nav__option-anchor--selected">
                         {search}
-                    </button>
+                    </NavLink>
                 </li>
                 <li className="nav__option">
-                    <button onClick={handleSearchClick} className="nav__option-anchor">
+                    <button className="nav__option-anchor">
                         Party
                     </button>
                 </li>

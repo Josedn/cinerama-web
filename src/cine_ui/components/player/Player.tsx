@@ -1,146 +1,236 @@
 import React, { RefObject, SyntheticEvent } from "react";
 import "./Player.scss";
+import Movie from "../../../cine_engine/ui_models/Movie";
+import CineEnvironment from "../../../cine_engine/CineEnvironment";
 import { Link } from "react-router-dom";
+import Constants from "../../../cine_engine/misc/Constants";
+import CinePlayer from "../../../cine_engine/cine_player/CinePlayer";
 import { secondsToTime } from "../../../cine_engine/misc/utils";
 
-type PlayerProps = {};
+type PlayerProps = {
+    movie: Movie;
+    src: string;
+    type: string;
+};
 type PlayerState = {
-    title: string;
-    currentTime: number;
     playing: boolean;
-    duration: number;
-    peekPosition: number;
+    currentTime: number; //seconds
+    durationTime: number; //seconds
+    peekPosition: number; //seconds
+    bufferedTime: number; //seconds
+    fullscreen: boolean;
 };
 const initialState: PlayerState = {
-    title: "Labyrinth",
     playing: false,
     currentTime: 0,
-    duration: 1,
-    peekPosition: 0
+    durationTime: -1,
+    peekPosition: -1,
+    bufferedTime: -1,
+    fullscreen: false,
 };
 
 class Player extends React.Component<PlayerProps, PlayerState> {
     videoRef: RefObject<HTMLVideoElement>;
     scrubberRef: RefObject<HTMLDivElement>;
+    mainPlayerRef: RefObject<HTMLDivElement>;
+    cinePlayer?: CinePlayer;
 
     constructor(props: PlayerProps) {
         super(props);
         this.state = initialState;
         this.videoRef = React.createRef();
         this.scrubberRef = React.createRef();
+        this.mainPlayerRef = React.createRef();
     }
 
     componentDidMount() {
-        const videoElement = this.videoRef.current;
-        (window as any).video = videoElement;
-        if (videoElement != null) {
-            videoElement.onpause = (event) => {
-                this.setState({
-                    playing: false
-                });
-            };
-            videoElement.onplay = (event) => {
-                this.setState({
-                    playing: true
-                });
-            };
-            videoElement.ontimeupdate = (event) => {
-                this.setState({
-                    currentTime: videoElement.currentTime,
-                    duration: videoElement.duration
-                });
-            };
-        }
-    }
-
-    componentWillUnmount() {
-        const videoElement = this.videoRef.current;
-        if (videoElement != null) {
-            videoElement.onpause = null;
-            videoElement.onplay = null;
-            videoElement.ontimeupdate = null;
-        }
-    }
-
-    handlePlayPauseClick = (event: SyntheticEvent<HTMLButtonElement>) => {
-        const videoElement = this.videoRef.current;
-        if (videoElement != null) {
-            if (videoElement.paused) {
-                videoElement.play();
-            } else {
-                videoElement.pause();
-            }
-        }
-    }
-
-    handleFullscreenClick = (event: SyntheticEvent<HTMLButtonElement>) => {
-        
-    }
-
-    handleProgressPeekHover = (event: SyntheticEvent<HTMLDivElement>) => {
-        const mouseEvent = event.nativeEvent as MouseEvent;
-        const container = this.scrubberRef.current;
-        const { duration } = this.state;
-        if (mouseEvent != null && container != null) {
-            const localPosition = mouseEvent.x - container.getBoundingClientRect().x;
-            const selectedPercent = localPosition / container.offsetWidth;
-            const peekPosition = selectedPercent * duration;
+        const onPause = () => {
             this.setState({
-                peekPosition
+                playing: false,
+            });
+        };
+        const onPlay = () => {
+            this.setState({
+                playing: true,
+            });
+        };
+        const onTimeUpdate = (currentTime: number, durationTime: number, bufferedTime: number) => {
+            this.setState({
+                currentTime,
+                durationTime,
+                bufferedTime
+            });
+        };
+        if (this.videoRef.current != null) {
+            this.cinePlayer = new CinePlayer(this.videoRef.current, onPause, onPlay, onTimeUpdate);
+        }
+        if (this.mainPlayerRef.current != null) {
+            this.mainPlayerRef.current.addEventListener('fullscreenchange', (event) => {
+                this.setState({
+                    fullscreen: document.fullscreenElement != null,
+                });
             });
         }
     }
 
-    handleProgressPeekClick = (event: SyntheticEvent<HTMLDivElement>) => {
-        console.log('do peek');
+    componentWillUnmount() {
+        if (this.cinePlayer != null) {
+            this.cinePlayer.dispose();
+        }
+    }
+
+    handleProgressPeekMove = (event: SyntheticEvent<HTMLDivElement>) => {
+        const mouseEvent = event.nativeEvent as MouseEvent;
+        const container = this.scrubberRef.current;
+        const { durationTime } = this.state;
+        if (mouseEvent != null && container != null && durationTime !== -1) {
+            const localPosition = mouseEvent.x - container.getBoundingClientRect().x;
+            const selectedPercent = localPosition / container.offsetWidth;
+            const peekPosition = selectedPercent * durationTime;
+            this.setState({
+                peekPosition,
+            });
+        }
+    }
+
+    handleProgressPeekStart = () => {
+
+    }
+
+    handleProgressPeekStop = () => {
+        this.setState({
+            peekPosition: -1,
+        });
     }
 
     getCurrentClock = () => {
-        const { currentTime, duration } = this.state;
-        return secondsToTime(duration - currentTime);
+        const { currentTime, durationTime } = this.state;
+        if (durationTime === -1) {
+            return secondsToTime(0);
+        }
+        return secondsToTime(durationTime - currentTime);
     }
 
     getProgressPercent = () => {
-        const { currentTime, duration } = this.state;
-        return (currentTime / duration) * 100;
+        const { currentTime, durationTime } = this.state;
+        if (durationTime === -1) {
+            return 0;
+        }
+        return (currentTime / durationTime) * 100;
     }
 
-    getPeekPercent = () => {
-        const { peekPosition, duration } = this.state;
-        return (peekPosition / duration) * 100;
+    getPlayHeadPercent = () => {
+        const { durationTime, peekPosition } = this.state;
+        if (peekPosition === -1 || durationTime === -1) {
+            return this.getProgressPercent();
+        }
+        return (peekPosition / durationTime) * 100;
     }
 
     getBufferedPercent = () => {
-        const videoElement = this.videoRef.current;
-        let max = 0;
-        if (videoElement != null) {
-            for (let i = 0; i < videoElement.buffered.length; i++) {
-                const current = videoElement.buffered.end(i);
-                if (current > max) {
-                    max = current;
-                }
-            }
-            return (max / videoElement.duration) * 100;
+        const { bufferedTime, durationTime } = this.state;
+        if (durationTime === -1) {
+            return 0;
         }
-        return 0;
+        return (bufferedTime / durationTime) * 100;
+    }
+
+    handlePlayPauseClick = () => {
+        if (this.cinePlayer != null) {
+            this.cinePlayer.doPlayPause();
+        }
+    }
+
+    handleProgressPeekClick = () => {
+        const { peekPosition } = this.state;
+        if (peekPosition >= 0 && this.cinePlayer != null) {
+            this.cinePlayer.doSetTime(peekPosition);
+        }
+    }
+
+    handleFullscreenClick = () => {
+        const { fullscreen } = this.state;
+        if (this.mainPlayerRef.current != null) {
+            if (fullscreen) {
+                document.exitFullscreen();
+            } else {
+                this.mainPlayerRef.current.requestFullscreen();
+            }
+        }
+    }
+
+    renderProgressBar() {
+        return (
+            <div className="control__progress-container">
+                <div className="control__progress-bar">
+                    <div className="scrubber__container" onMouseMove={this.handleProgressPeekMove} onMouseEnter={this.handleProgressPeekStart} onMouseLeave={this.handleProgressPeekStop}>
+                        <div className="scrubber__bar">
+                            <div className="scrubber__track" ref={this.scrubberRef} onClick={this.handleProgressPeekClick}>
+                                <div className="scrubber__buffered" style={{ width: this.getBufferedPercent() + "%" }}></div>
+                                <div className="scrubber__progress" style={{ width: this.getPlayHeadPercent() + "%" }}></div>
+                                <div className="scrubber__play-head" style={{ width: this.getPlayHeadPercent() + "%" }}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="control__progress-time">
+                    <div className="control__time-remaining">
+                        {this.getCurrentClock()}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    renderControlButtons() {
+        const { movie } = this.props;
+        const { playing, fullscreen } = this.state;
+        const playButtonState = playing ? "pause" : "play";
+        const fullscreenButtonState = fullscreen ? "compress" : "expand";
+
+        const title = movie.title;
+
+        return (
+            <div className="control__buttons">
+                <button className="control__button" onClick={this.handlePlayPauseClick}>
+                    <i className={"fa fa-" + playButtonState + " control__button-icon"} aria-hidden="true"></i>
+                </button>
+                <button className="control__button">
+                    <i className="fa fa-volume-up control__button-icon" aria-hidden="true"></i>
+                </button>
+                <div className="control__title">
+                    {title}
+                </div>
+                <button className="control__button">
+                    <i className="fa fa-question-circle-o control__button-icon" aria-hidden="true"></i>
+                </button>
+                <button className="control__button">
+                    <i className="fa fa-cc control__button-icon" aria-hidden="true"></i>
+                </button>
+                <button className="control__button" onClick={this.handleFullscreenClick}>
+                    <i className={"fa fa-" + fullscreenButtonState + " control__button-icon"} aria-hidden="true"></i>
+                </button>
+            </div>
+        );
     }
 
     render() {
-        const { playing, title } = this.state;
-        const playButtonState = playing ? "pause" : "play";
+        const { src, type } = this.props;
+        const { unsupportedHtmlVideo } = CineEnvironment.getCine().cineUniversal.player;
 
         return (
-            <div className="player">
+            <div ref={this.mainPlayerRef} className="player">
                 <video ref={this.videoRef} className="player__video">
-                    <source src="http://filmstock.tv/Labyrinth.1986.720p.BluRay.x264.YIFY.mp4" type="video/mp4" />
-                    Your browser does not support HTML5 video.
+                    <source src={src} type={type} />
+                    {unsupportedHtmlVideo}
                 </video>
+
                 <div className="player__control-zone">
                     <div className="player__backdrop--active player__backdrop-top"></div>
                     <div className="player__backdrop--active player__backdrop-bottom"></div>
                     <div className="control__top">
                         <div className="control__buttons">
-                            <Link to="/">
+                            <Link to={Constants.PAGES.HOME.url}>
                                 <button className="control__button">
                                     <i className="fa fa-angle-left control__button-icon" aria-hidden="true"></i>
                                 </button>
@@ -148,44 +238,8 @@ class Player extends React.Component<PlayerProps, PlayerState> {
                         </div>
                     </div>
                     <div className="control__bottom">
-                        <div className="control__progress-container">
-                            <div className="control__progress-bar">
-                                <div className="scrubber__container" onMouseOver={this.handleProgressPeekHover}>
-                                    <div className="scrubber__bar">
-                                        <div className="scrubber__track" ref={this.scrubberRef} onClick={this.handleProgressPeekClick}>
-                                            <div className="scrubber__buffered" style={{ width: this.getBufferedPercent() + "%" }}></div>
-                                            <div className="scrubber__progress" style={{ width: this.getProgressPercent() + "%" }}></div>
-                                            <div className="scrubber__play-head" style={{ width: this.getPeekPercent() + "%" }}></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="control__progress-time">
-                                <div className="control__time-remaining">
-                                    {this.getCurrentClock()}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="control__buttons">
-                            <button className="control__button" onClick={this.handlePlayPauseClick}>
-                                <i className={"fa fa-" + playButtonState + " control__button-icon"} aria-hidden="true"></i>
-                            </button>
-                            <button className="control__button">
-                                <i className="fa fa-volume-up control__button-icon" aria-hidden="true"></i>
-                            </button>
-                            <div className="control__title">
-                                {title}
-                            </div>
-                            <button className="control__button">
-                                <i className="fa fa-question-circle-o control__button-icon" aria-hidden="true"></i>
-                            </button>
-                            <button className="control__button">
-                                <i className="fa fa-cc control__button-icon" aria-hidden="true"></i>
-                            </button>
-                            <button className="control__button" onClick={this.handleFullscreenClick}>
-                                <i className="fa fa-expand control__button-icon" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                        {this.renderProgressBar()}
+                        {this.renderControlButtons()}
                     </div>
                 </div>
             </div>

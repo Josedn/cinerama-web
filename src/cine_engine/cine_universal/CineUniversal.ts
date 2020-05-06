@@ -2,6 +2,7 @@ export default class CineUniversal {
     header: HeaderTexts;
     footer: FooterTexts;
     search: SearchTexts;
+    player: PlayerTexts;
 
     constructor() {
         this.header = {
@@ -20,7 +21,11 @@ export default class CineUniversal {
 
         this.search = {
             placeholder: "Movies, people, genres...",
-        }
+        };
+
+        this.player = {
+            unsupportedHtmlVideo: "Your browser does not support HTML5 video.",
+        };
     }
 
     loadLanguage(language: string): Promise<void> {
@@ -46,4 +51,8 @@ export type FooterTexts = {
 
 export type SearchTexts = {
     placeholder: string;
+};
+
+export type PlayerTexts = {
+    unsupportedHtmlVideo: string;
 };

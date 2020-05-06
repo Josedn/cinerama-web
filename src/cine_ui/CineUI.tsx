@@ -9,10 +9,16 @@ import Constants from "../cine_engine/misc/Constants";
 import Header from "./components/header/Header";
 import Redirector from "./components/generic/Redirector";
 
+const EmptyComponent: React.FC = () => <></>;
+
 const CineUI: React.FC = () => {
+
     return (
         <Router>
-            <Header></Header>
+            <Switch>
+                <Route path={Constants.PAGES.WATCH.url} component={EmptyComponent} />
+                <Route component={Header} />
+            </Switch>
             <Switch>
                 <Route path={Constants.PAGES.WATCH.url} component={Watch} />
                 <Route path={Constants.PAGES.SEARCH.url} component={Search} />
