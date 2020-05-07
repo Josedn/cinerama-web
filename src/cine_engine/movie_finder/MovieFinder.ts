@@ -39,7 +39,7 @@ export default class MovieFinder {
         });
     }
 
-    searchMovies(query: string): Promise<MovieGroup> {
+    searchByName(query: string): Promise<MovieGroup> {
         return new Promise((resolve, reject) => {
 
             NProgress.start();
@@ -52,6 +52,27 @@ export default class MovieFinder {
             setTimeout(() => {
                 NProgress.done();
                 resolve(new MovieGroup("search: " + query, search));
+            }, 400);
+        });
+    }
+
+    searchBySlug(slug: string): Promise<Movie> {
+        return new Promise((resolve, reject) => {
+            NProgress.start();
+
+            slug = slug.toLowerCase();
+            const search = harryPotters.concat([pulp, godfather2]).filter(movie => {
+                return (movie as Movie).slug.toLowerCase().includes(slug);
+            });
+
+            setTimeout(() => {
+                NProgress.done();
+
+                if (search.length > 0) {
+                    resolve(search[0]);
+                } else {
+                    resolve(pulp);
+                }
             }, 400);
         });
     }

@@ -3,6 +3,7 @@ export default class CineUniversal {
     footer: FooterTexts;
     search: SearchTexts;
     player: PlayerTexts;
+    home: HomeTexts;
 
     constructor() {
         this.header = {
@@ -13,7 +14,7 @@ export default class CineUniversal {
         };
 
         this.footer = {
-            copyrightInfo: "Filmstock.tv © 2020 - All rights reserved to their respective owners",
+            copyrightInfo: "Filmstock.tv © 2020 - All rights reserved to their respective owners.",
             dmca: "DMCA",
             terms: "Terms",
             contact: "Contact",
@@ -25,6 +26,11 @@ export default class CineUniversal {
 
         this.player = {
             unsupportedHtmlVideo: "Your browser does not support HTML5 video.",
+        };
+
+        this.home = {
+            slideshowTitle: "Trending",
+            play: "Play",
         };
     }
 
@@ -55,4 +61,9 @@ export type SearchTexts = {
 
 export type PlayerTexts = {
     unsupportedHtmlVideo: string;
+};
+
+export type HomeTexts = {
+    slideshowTitle: string;
+    play: string;
 };

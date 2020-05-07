@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../../../cine_engine/ui_models/Movie";
 import CineEnvironment from "../../../cine_engine/CineEnvironment";
+import Constants from "../../../cine_engine/misc/Constants";
 
 type SlideshowProps = {
     movies: Movie[]
@@ -43,8 +44,8 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
     const currentMovie = movies[currentMovieIndex];
     const buttons = generateButtons(movies.length, currentMovieIndex, id => setCurrentMovieIndex(id));
 
-    
     CineEnvironment.getCine().cineState.handleChangeBackground(currentMovie.images.fanart);
+    const { slideshowTitle, play } = CineEnvironment.getCine().cineUniversal.home;
 
     const preview =
         <div className="slideshow__preview">
@@ -61,17 +62,17 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
             <p className="slideshow__description">
                 {currentMovie.synopsis}
             </p>
-            <Link to={"/watch/" + currentMovie.slug}>
+            <Link to={Constants.PAGES.WATCH.url + "/" + currentMovie.slug}>
                 <button className="slideshow__button">
                     <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
-                    <span className="slideshow__button-text">Play</span>
+                    <span className="slideshow__button-text">{play}</span>
                 </button>
             </Link>
         </div>;
 
     return (
         <div className="billboard__slideshow">
-            <h2 className="billboard__title">Popular on Filmstock</h2>
+            <h2 className="billboard__title">{slideshowTitle}</h2>
             <div className="slideshow">
                 {preview}
                 {content}

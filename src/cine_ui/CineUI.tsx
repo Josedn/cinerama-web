@@ -23,10 +23,10 @@ const CineUI: React.FC = () => {
                 <Route component={Header} />
             </Switch>
             <Switch>
-                <Route path={Constants.PAGES.WATCH.url} component={Loading} />
+                <Route path={Constants.PAGES.WATCH.url + "/:slug"} component={Loading} />
                 <Route path={Constants.PAGES.SEARCH.url} component={Search} />
                 <Route path={Constants.PAGES.EXPLORE.url} component={Explore} />
-                <Route path={Constants.PAGES.MOVIE.url} component={MovieDetails} />
+                <Route path={Constants.PAGES.MOVIE.url + "/:slug"} component={MovieDetails} />
                 <Route component={Home} />
             </Switch>
             <Redirector />
