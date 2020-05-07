@@ -10,6 +10,12 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    background-color: $cine_black;
+}
+
+.loading__icon {
+    width: 25px;
+    margin-bottom: 10px;
 }
 
 .loading__logo {

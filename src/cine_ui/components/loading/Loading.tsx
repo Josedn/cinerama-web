@@ -19,7 +19,8 @@ const Loading: React.FC<LoadingProps> = (props) => {
 
     return (
         <div className="loading">
-            <img className="loading__logo" src="/images/filmstock_white.svg" alt="Filmstock" />
+            <img className="loading__icon" src="/images/loading.svg" alt="Filmstock" />
+            <img className="loading__logo" src="/images/filmstock.svg" alt="Filmstock" />
             <h2 className="loading__teaser">{teaser}</h2>
             <footer className="loading__footer">{copyrightInfo}</footer>
         </div>

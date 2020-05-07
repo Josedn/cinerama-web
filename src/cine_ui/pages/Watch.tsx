@@ -35,7 +35,7 @@ const Watch: React.FC = () => {
     if (movieStream != null) {
         return <Player movie={movieStream.movie} src={movieStream.streamUrl} type={movieStream.type} />;
     } else {
-        return <Loading  teaser={teaser} />;
+        return <Loading teaser={teaser} />;
     }
 
 }
