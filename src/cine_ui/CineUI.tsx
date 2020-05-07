@@ -2,14 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./CineUI.scss";
 import Home from "./pages/Home";
-// eslint-disable-next-line
 import Watch from "./pages/Watch";
 import Search from "./pages/Search";
 import Explore from "./pages/Explore";
 import Constants from "../cine_engine/misc/Constants";
 import Header from "./components/header/Header";
 import Redirector from "./components/generic/Redirector";
-import Loading from "./components/loading/Loading";
 import MovieDetails from "./pages/MovieDetails";
 
 const EmptyComponent: React.FC = () => <></>;
