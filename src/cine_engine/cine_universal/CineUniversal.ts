@@ -26,6 +26,7 @@ export default class CineUniversal {
 
         this.player = {
             unsupportedHtmlVideo: "Your browser does not support HTML5 video.",
+            loading: "Loading...",
         };
 
         this.home = {
@@ -61,6 +62,7 @@ export type SearchTexts = {
 
 export type PlayerTexts = {
     unsupportedHtmlVideo: string;
+    loading: string;
 };
 
 export type HomeTexts = {

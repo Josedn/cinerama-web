@@ -7,7 +7,7 @@ import Loading from "../components/loading/Loading";
 
 const Watch: React.FC = () => {
     const [movieStream, setMovieStream] = useState<MovieStream>();
-    const [teaser, setTeaser] = useState<string>("...");
+    const [teaser, setTeaser] = useState<string>(CineEnvironment.getCine().cineUniversal.player.loading);
 
     let { slug } = useParams();
 
