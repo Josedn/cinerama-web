@@ -56,6 +56,11 @@
     font-weight: 400;
 }
 
+.billboard__title--skeleton {
+    background: $cine_skeleton;
+    width: 300px;
+}
+
 .group__grid {
     display: flex;
     flex-wrap: wrap;
@@ -75,6 +80,12 @@
     color: $cine_white;
 }
 
+.movie__preview-container {
+    width: 200px;
+    height: 300px;
+    background: $cine_skeleton;
+}
+
 .movie__preview {
     width: 200px;
     height: 300px;
@@ -87,4 +98,10 @@
 .movie__title {
     font-size: 18px;
     font-weight: 300;
+}
+
+.movie__title--skeleton {
+    width: 160px;
+    background: $cine_skeleton;
+    margin-top: 5px;
 }

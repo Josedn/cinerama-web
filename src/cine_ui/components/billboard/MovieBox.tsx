@@ -18,4 +18,16 @@ const MovieBox: React.FC<MovieBoxProps> = (props: MovieBoxProps) => {
     );
 };
 
+export const MovieBoxSkeleton: React.FC = () => {
+    return (
+        <div className="movie">
+            <div className="movie__preview-container">
+            </div>
+            <div className="movie__info">
+                <h4 className="movie__title movie__title--skeleton">&nbsp;</h4>
+            </div>
+        </div>
+    );
+};
+
 export default MovieBox;

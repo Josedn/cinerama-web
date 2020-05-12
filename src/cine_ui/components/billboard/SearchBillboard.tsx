@@ -21,7 +21,7 @@ const SearchBillBoard: React.FC = () => {
     return (
         <div className="billboard">
             <Background />
-            <BillboardGroup title={movieGroup.title} movies={movieGroup.movies} />
+            <BillboardGroup movieGroup={movieGroup} />
         </div>
     );
 };

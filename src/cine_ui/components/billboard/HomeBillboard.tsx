@@ -9,15 +9,15 @@ import MovieGroup from "../../../cine_engine/ui_models/MovieGroup";
 
 const HomeBillboard: React.FC = () => {
     const [slideshowMovies, setSlideshowMovies] = useState<Movie[] | null>(null);
-    const [homeMovieGroup, setHomeMovieGroup] = useState<MovieGroup>({ title: "", movies: [] });
+    const [homeMovieGroup, setHomeMovieGroup] = useState<MovieGroup | null>(null);
 
     useEffect(() => {
         CineEnvironment.getCine().movieFinder.getSlideshowMovies().then(movies => {
-            //setTimeout(() => setSlideshowMovies(movies), 1000);
+            setTimeout(() => setSlideshowMovies(movies), 1000);
         });
 
         CineEnvironment.getCine().movieFinder.getFeaturedMovies().then(movieGroup => {
-            setHomeMovieGroup(movieGroup);
+            setTimeout(() => setHomeMovieGroup(movieGroup), 1000);
         });
 
     }, []);
@@ -26,7 +26,7 @@ const HomeBillboard: React.FC = () => {
         <div className="billboard">
             <Background />
             <BillboardSlideshow movies={slideshowMovies} />
-            <BillboardGroup title={homeMovieGroup.title} movies={homeMovieGroup.movies} />
+            <BillboardGroup movieGroup={homeMovieGroup} />
         </div>
     );
 };

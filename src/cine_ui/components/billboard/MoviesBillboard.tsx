@@ -17,7 +17,7 @@ const MoviesBillboard: React.FC = () => {
     }, []);
 
     const showGroups = movieGroups.map(group => {
-        return <BillboardGroup key={group.title} title={group.title} movies={group.movies} />; //TODO: check key
+        return <BillboardGroup key={group.title} movieGroup={group} />; //TODO: check key
     });
 
     return (

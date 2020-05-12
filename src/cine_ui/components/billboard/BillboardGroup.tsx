@@ -1,10 +1,29 @@
 import React from "react";
-import MovieBox from "./MovieBox";
+import MovieBox, { MovieBoxSkeleton } from "./MovieBox";
 import MovieGroup from "../../../cine_engine/ui_models/MovieGroup";
 import Constants from "../../../cine_engine/misc/Constants";
 
-const BillboardGroup: React.FC<MovieGroup> = (props: MovieGroup) => {
-    const { title, movies } = props;
+type BillboardGroupProps = {
+    movieGroup: MovieGroup | null,
+};
+
+const BillboardGroup: React.FC<BillboardGroupProps> = (props: BillboardGroupProps) => {
+    const { movieGroup } = props;
+
+    if (movieGroup == null) {
+        return (
+            <div className="billboard__group">
+                <h2 className="billboard__title billboard__title--skeleton">&nbsp;</h2>
+                <div className="group__grid">
+                    <MovieBoxSkeleton />
+                    <MovieBoxSkeleton />
+                    <MovieBoxSkeleton />
+                    <MovieBoxSkeleton />
+                </div>
+            </div>
+        );
+    }
+    const { title, movies } = movieGroup;
     const MovieBoxs = movies.map(movie => {
         return <MovieBox key={movie._id} imgSrc={movie.images.banner} title={movie.title} link={Constants.PAGES.MOVIE.url + "/" + movie.slug} />;
     });
