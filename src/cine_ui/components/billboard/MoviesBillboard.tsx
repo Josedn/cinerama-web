@@ -10,7 +10,7 @@ const MoviesBillboard: React.FC = () => {
     const [movieGroups, setMovieGroups] = useState<MovieGroup[] | null>(null);
 
     useEffect(() => {
-        CineEnvironment.getCine().movieFinder.getExploreMovieGroups().then(groups => {
+        CineEnvironment.getCine().movieFinder.getExploreMovies().then(groups => {
             setMovieGroups(groups);
         });
 

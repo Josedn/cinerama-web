@@ -30,6 +30,8 @@ export default class Constants {
 
     public static readonly MOVIE_FINDER_API = {
         SLIDESHOW_URL: Constants.MOVIE_FINDER_API_URL + "slideshow",
-        FEATURED_URL: Constants.MOVIE_FINDER_API_URL + "featured"
+        FEATURED_URL: Constants.MOVIE_FINDER_API_URL + "featured",
+        EXPLORE_URL: Constants.MOVIE_FINDER_API_URL + "explore",
+        SEARCH_URL: Constants.MOVIE_FINDER_API_URL + "search/"
     };
 }

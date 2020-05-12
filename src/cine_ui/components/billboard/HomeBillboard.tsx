@@ -13,11 +13,11 @@ const HomeBillboard: React.FC = () => {
 
     useEffect(() => {
         CineEnvironment.getCine().movieFinder.getSlideshowMovies().then(movies => {
-            setTimeout(() => setSlideshowMovies(movies), 1000);
+            setSlideshowMovies(movies);
         });
 
         CineEnvironment.getCine().movieFinder.getFeaturedMovies().then(movieGroup => {
-            setTimeout(() => setHomeMovieGroup(movieGroup), 1000);
+            setHomeMovieGroup(movieGroup);
         });
 
     }, []);

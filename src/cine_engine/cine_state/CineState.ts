@@ -41,7 +41,7 @@ export default class CineState {
         this.currentSearch = searchText;
         if (searchText.length > 0) {
             this.handleRedirect(Constants.PAGES.SEARCH.url + "?q=" + encodeURI(this.currentSearch));
-            CineEnvironment.getCine().movieFinder.searchByName(this.currentSearch).then(group => {
+            CineEnvironment.getCine().movieFinder.getSearchMovies(this.currentSearch).then(group => {
                 this.onUpdateSearchResults(group);
             });
         }

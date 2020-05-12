@@ -16,6 +16,17 @@ export default class MovieFinder {
         return genericGet<MovieGroup>(Constants.MOVIE_FINDER_API.FEATURED_URL, NProgress.done);
     }
 
+    getExploreMovies = () => {
+        NProgress.start();
+        return genericGet<MovieGroup[]>(Constants.MOVIE_FINDER_API.EXPLORE_URL, NProgress.done);
+    }
+
+    getSearchMovies = (search: string) => {
+        NProgress.start();
+        const searchUri = encodeURI(search);
+        return genericGet<MovieGroup>(Constants.MOVIE_FINDER_API.SEARCH_URL + searchUri, NProgress.done);
+    }
+
     getSlideshowMoviesFake(): Promise<Movie[]> {
         return new Promise((resolve, reject) => {
 
