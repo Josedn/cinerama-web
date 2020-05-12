@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import Movie from "../../../cine_engine/ui_models/Movie";
 import CineEnvironment from "../../../cine_engine/CineEnvironment";
 import Constants from "../../../cine_engine/misc/Constants";
+import "./Slideshow.scss";
 
 type SlideshowProps = {
-    movies: Movie[]
+    movies: Movie[] | null
 };
 
 const generateButtons = (total: number, activeIndex: number, onClick: (id: number) => void): React.ReactNode[] => {
@@ -20,22 +21,52 @@ const generateButtons = (total: number, activeIndex: number, onClick: (id: numbe
 const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
     const { movies } = props;
+    const { slideshowTitle, play } = CineEnvironment.getCine().cineUniversal.home;
 
     useEffect(() => {
-        const moveNext = () => {
-            if (movies.length > 1 && currentMovieIndex < movies.length - 1) {
-                setCurrentMovieIndex(currentMovieIndex + 1);
-            } else {
-                setCurrentMovieIndex(0);
-            }
-        };
+        if (movies != null) {
+            const moveNext = () => {
+                if (movies.length > 1 && currentMovieIndex < movies.length - 1) {
+                    setCurrentMovieIndex(currentMovieIndex + 1);
+                } else {
+                    setCurrentMovieIndex(0);
+                }
+            };
 
-        const intervalId = setInterval(moveNext, 7000);
-        //TODO: add transition
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, [currentMovieIndex, movies.length]);
+            const intervalId = setInterval(moveNext, 7000);
+            //TODO: add transition
+            return () => {
+                clearInterval(intervalId);
+            };
+        }
+    }, [currentMovieIndex, movies]);
+
+    if (movies == null) {
+        return (
+            <div className="billboard__slideshow">
+                <h2 className="billboard__title billboard__title--skeleton">&nbsp;</h2>
+                <div className="slideshow">
+                    <div className="slideshow__preview">
+                        <div className="slideshow__image-container">
+                        </div>
+                        <div className="slideshow__progress">
+                        </div>
+                    </div>
+                    <div className="slideshow__content">
+                        <h3 className="slideshow__title slideshow__title--skeleton">&nbsp;</h3>
+                        <h4 className="slideshow__subtitle slideshow__subtitle--skeleton">&nbsp;</h4>
+                        <p className="slideshow__description slideshow__description--skeleton">
+                            &nbsp;
+                        </p>
+                        <button className="slideshow__button slideshow__button--skeleton">
+                            <i className="fa fa-play slideshow__button-icon" aria-hidden="true"></i>
+                            <span className="slideshow__button-text">&nbsp;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (movies.length === 0) {
         return <></>;
@@ -45,11 +76,12 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
     const buttons = generateButtons(movies.length, currentMovieIndex, id => setCurrentMovieIndex(id));
 
     CineEnvironment.getCine().cineState.handleChangeBackground(currentMovie.images.fanart);
-    const { slideshowTitle, play } = CineEnvironment.getCine().cineUniversal.home;
 
     const preview =
         <div className="slideshow__preview">
-            <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} />
+            <div className="slideshow__image-container">
+                <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} />
+            </div>
             <div className="slideshow__progress">
                 {buttons}
             </div>
