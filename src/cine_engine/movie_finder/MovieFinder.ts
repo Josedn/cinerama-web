@@ -1,9 +1,22 @@
 import NProgress from 'nprogress';
 import Movie from "../ui_models/Movie";
 import MovieGroup from '../ui_models/MovieGroup';
+import Constants from '../misc/Constants';
+import { genericGet } from '../misc/Http';
 
 export default class MovieFinder {
-    getSlideshowMovies(): Promise<Movie[]> {
+
+    getSlideshowMovies = () => {
+        NProgress.start();
+        return genericGet<Movie[]>(Constants.MOVIE_FINDER_API.SLIDESHOW_URL, NProgress.done);
+    }
+
+    getFeaturedMovies = () => {
+        NProgress.start();
+        return genericGet<MovieGroup>(Constants.MOVIE_FINDER_API.FEATURED_URL, NProgress.done);
+    }
+
+    getSlideshowMoviesFake(): Promise<Movie[]> {
         return new Promise((resolve, reject) => {
 
             NProgress.start();
@@ -15,7 +28,7 @@ export default class MovieFinder {
         });
     }
 
-    getHomeMovieGroup(): Promise<MovieGroup> {
+    getFeaturedMoviesFake(): Promise<MovieGroup> {
         return new Promise((resolve, reject) => {
 
             NProgress.start();

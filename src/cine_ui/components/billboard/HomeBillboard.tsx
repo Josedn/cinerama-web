@@ -16,7 +16,7 @@ const HomeBillboard: React.FC = () => {
             setSlideshowMovies(movies);
         });
 
-        CineEnvironment.getCine().movieFinder.getHomeMovieGroup().then(movieGroup => {
+        CineEnvironment.getCine().movieFinder.getFeaturedMovies().then(movieGroup => {
             setHomeMovieGroup(movieGroup);
         });
 

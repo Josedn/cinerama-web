@@ -25,4 +25,11 @@ export default class Constants {
             url: "/logout"
         },
     };
+
+    private static readonly MOVIE_FINDER_API_URL = "http://localhost:1232/";
+
+    public static readonly MOVIE_FINDER_API = {
+        SLIDESHOW_URL: Constants.MOVIE_FINDER_API_URL + "slideshow",
+        FEATURED_URL: Constants.MOVIE_FINDER_API_URL + "featured"
+    };
 }
