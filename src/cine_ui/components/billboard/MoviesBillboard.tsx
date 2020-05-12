@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
 import "./Billboard.scss";
 import BillboardGroup from "./BillboardGroup";
 import Background from "./Background";
@@ -7,7 +7,7 @@ import MovieGroup from "../../../cine_engine/ui_models/MovieGroup";
 
 const MoviesBillboard: React.FC = () => {
 
-    const [movieGroups, setMovieGroups] = useState<MovieGroup[]>([]);
+    const [movieGroups, setMovieGroups] = useState<MovieGroup[] | null>(null);
 
     useEffect(() => {
         CineEnvironment.getCine().movieFinder.getExploreMovieGroups().then(groups => {
@@ -15,10 +15,17 @@ const MoviesBillboard: React.FC = () => {
         });
 
     }, []);
+    let showGroups: ReactNode[] = [];
 
-    const showGroups = movieGroups.map(group => {
-        return <BillboardGroup key={group.title} movieGroup={group} />; //TODO: check key
-    });
+    if (movieGroups != null) {
+        showGroups = movieGroups.map(group => {
+            return <BillboardGroup key={group.title} movieGroup={group} />; //TODO: check key
+        });
+    } else {
+        for (let i = 0; i < 3; i++) {
+            showGroups.push(<BillboardGroup key={i} movieGroup={null} />);
+        }
+    }
 
     return (
         <div className="billboard">

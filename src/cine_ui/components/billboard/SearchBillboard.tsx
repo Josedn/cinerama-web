@@ -7,7 +7,7 @@ import MovieGroup from "../../../cine_engine/ui_models/MovieGroup";
 
 const SearchBillBoard: React.FC = () => {
 
-    const [movieGroup, setMovieGroup] = useState<MovieGroup>({ title: "", movies: [] });
+    const [movieGroup, setMovieGroup] = useState<MovieGroup | null>(null);
 
     useEffect(() => {
         CineEnvironment.getCine().cineState.onUpdateSearchResults = result => {
