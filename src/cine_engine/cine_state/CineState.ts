@@ -37,12 +37,15 @@ export default class CineState {
         this.onRedirect(undefined);
     }
 
-    handleSearch(searchText: string) {
+    handleSearch(searchText: string, fromReload: boolean) {
+        if (fromReload && this.currentSearch === searchText) {
+            return;
+        }
         this.currentSearch = searchText;
         if (searchText.length > 0) {
             this.handleRedirect(Constants.PAGES.SEARCH.url + "?q=" + encodeURI(this.currentSearch));
-            CineEnvironment.getCine().movieFinder.getSearchMovies(this.currentSearch).then(group => {
-                this.onUpdateSearchResults(group);
+            CineEnvironment.getCine().movieFinder.getSearchMovies(this.currentSearch).then(movies => {
+                this.onUpdateSearchResults(new MovieGroup("search result: ", movies));
             });
         }
     }

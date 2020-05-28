@@ -24,7 +24,7 @@ export default class MovieFinder {
     getSearchMovies = (search: string) => {
         NProgress.start();
         const searchUri = encodeURI(search);
-        return genericGet<MovieGroup>(Constants.MOVIE_FINDER_API.SEARCH_URL + searchUri, NProgress.done);
+        return genericGet<Movie[]>("http://localhost:1232/movies/1?keywords=" + searchUri, NProgress.done);
     }
 
     getSlideshowMoviesFake(): Promise<Movie[]> {

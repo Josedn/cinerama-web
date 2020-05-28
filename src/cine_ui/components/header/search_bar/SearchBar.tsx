@@ -54,7 +54,7 @@ export default class SearchBar extends React.Component<SearchBarProps, SearchBar
     submitSearch = () => {
         const { searchText } = this.state;
         if (searchText.length > 0) {
-            CineEnvironment.getCine().cineState.handleSearch(searchText);
+            CineEnvironment.getCine().cineState.handleSearch(searchText, false);
         }
     }
 

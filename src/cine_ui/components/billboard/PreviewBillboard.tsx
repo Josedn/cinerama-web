@@ -14,12 +14,17 @@ const PreviewBillboard: React.FC<PreviewBillboardProps> = (props: PreviewBillboa
     const { movie } = props;
 
     const { play } = CineEnvironment.getCine().cineUniversal.home;
+    if (movie.images != null) {
+        CineEnvironment.getCine().cineState.handleChangeBackground(movie.images.fanart);
+    }
 
-    CineEnvironment.getCine().cineState.handleChangeBackground(movie.images.fanart);
+    const image = movie.images != null ? <img className="slideshow__image" src={movie.images.banner} alt={movie.title} /> : <></>;
 
     const preview =
         <div className="slideshow__preview">
-            <img className="slideshow__image" src={movie.images.banner} alt={movie.title} />
+            <div className="slideshow__image-container">
+                {image}
+            </div>
             <div className="slideshow__progress">
 
             </div>

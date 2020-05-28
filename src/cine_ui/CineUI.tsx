@@ -13,7 +13,6 @@ import MovieDetails from "./pages/MovieDetails";
 const EmptyComponent: React.FC = () => <></>;
 
 const CineUI: React.FC = () => {
-
     return (
         <Router>
             <Switch>

@@ -74,13 +74,16 @@ const Slideshow: React.FC<SlideshowProps> = (props: SlideshowProps) => {
 
     const currentMovie = movies[currentMovieIndex];
     const buttons = generateButtons(movies.length, currentMovieIndex, id => setCurrentMovieIndex(id));
+    if (currentMovie.images != null) {
+        CineEnvironment.getCine().cineState.handleChangeBackground(currentMovie.images.fanart);
+    }
 
-    CineEnvironment.getCine().cineState.handleChangeBackground(currentMovie.images.fanart);
+    const image = currentMovie.images != null ? <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} /> : <></>;
 
     const preview =
         <div className="slideshow__preview">
             <div className="slideshow__image-container">
-                <img className="slideshow__image" src={currentMovie.images.banner} alt={currentMovie.title} />
+                {image}
             </div>
             <div className="slideshow__progress">
                 {buttons}

@@ -7,7 +7,7 @@ export default class Movie {
     runtime: number;
     trailer: string;
     slug: string;
-    images: {
+    images?: {
         banner: string;
         fanart: string;
         poster: string;

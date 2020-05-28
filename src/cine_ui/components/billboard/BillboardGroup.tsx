@@ -25,7 +25,7 @@ const BillboardGroup: React.FC<BillboardGroupProps> = (props: BillboardGroupProp
     }
     const { title, movies } = movieGroup;
     const MovieBoxs = movies.map(movie => {
-        return <MovieBox key={movie._id} imgSrc={movie.images.banner} title={movie.title} link={Constants.PAGES.MOVIE.url + "/" + movie.slug} />;
+        return <MovieBox key={movie._id} imgSrc={movie.images?.banner} title={movie.title} link={Constants.PAGES.MOVIE.url + "/" + movie.slug} />;
     });
     return (
         <div className="billboard__group">
